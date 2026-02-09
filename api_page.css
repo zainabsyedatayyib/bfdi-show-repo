@@ -1,0 +1,324 @@
+/* API Page Styles */
+:root {
+    --border-color: #1a1a2e;
+    --accent-yellow: #FFE66D;
+    --accent-cyan: #4ECDC4;
+    --accent-purple: #C44DFF;
+    --accent-lime: #95E616;
+    --accent-pink: #FF6B9D;
+    --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Keep all colors the same as light mode */
+        --border-color: #1a1a2e;
+        --accent-yellow: #FFE66D;
+        --accent-cyan: #4ECDC4;
+        --accent-purple: #C44DFF;
+        --accent-lime: #95E616;
+        --accent-pink: #FF6B9D;
+        /* Only change overlay background */
+        --bg-overlay: rgba(15, 15, 26, 0.85);
+        --card-bg: #1a1a2e;
+        --text-primary: #1a1a2e;
+    }
+}
+
+.api-container {
+    min-height: 100vh;
+    background: url('imgs/bgbfdi.jpg') center/cover no-repeat;
+    position: relative;
+    padding: 4rem 2rem;
+    overflow: hidden;
+}
+
+.api-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .api-container::before {
+        background: var(--bg-overlay, rgba(15, 15, 26, 0.85));
+    }
+}
+
+.api-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.api-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.api-header h1 {
+    font-family: var(--headerfont);
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--border-color);
+    margin-bottom: 1rem;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.api-card {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .api-card {
+        background: var(--card-bg, #1a1a2e);
+        color: white;
+    }
+    
+    .api-card h2 {
+        color: var(--accent-yellow);
+    }
+    
+    .api-card p {
+        color: white;
+    }
+    
+    .api-header h1 {
+        color: var(--accent-yellow);
+    }
+    
+    .api-header p {
+        color: white !important;
+    }
+}
+
+.api-card h2 {
+    font-family: var(--headerfont);
+    font-size: 2.5rem;
+    color: var(--border-color);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.api-card p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--border-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .api-card p {
+        color: white;
+    }
+}
+
+.code-block {
+    background: var(--accent-yellow);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    overflow-x: auto;
+    box-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .code-block {
+        color: var(--text-primary, #f0f0f0);
+    }
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.api-button {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--accent-cyan);
+    color: var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+    box-shadow: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.api-button:hover {
+    background-color: var(--accent-lime);
+    transform: none;
+    box-shadow: none;
+    opacity: 0.9;
+}
+
+.api-button:active {
+    transform: none;
+    box-shadow: none;
+    opacity: 0.8;
+}
+
+.api-button.primary {
+    background-color: var(--accent-pink);
+    color: white;
+}
+
+.api-button.primary:hover {
+    background-color: var(--accent-purple);
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    background: var(--accent-yellow);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    .feature-list li {
+        color: var(--border-color);
+    }
+}
+
+.feature-list li::before {
+    content: "→ ";
+    color: var(--accent-purple);
+    font-weight: 900;
+}
+
+.back-link {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+}
+
+/* Decorative character images */
+.api-decorative-char {
+    position: fixed;
+    z-index: 10;
+    pointer-events: none;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+/* Tennis Ball - top right corner */
+.api-char-tennis {
+    top: 5%;
+    right: 2%;
+    width: clamp(80px, 12vw, 140px);
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Basketball - middle left */
+.api-char-basketball {
+    top: 35%;
+    left: 1%;
+    width: clamp(70px, 11vw, 130px);
+    animation: float 5s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+/* Golf Ball - bottom right */
+.api-char-golf {
+    bottom: 8%;
+    right: 3%;
+    width: clamp(60px, 10vw, 110px);
+    animation: float 4.5s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Hover effects */
+.api-char-tennis:hover,
+.api-char-basketball:hover,
+.api-char-golf:hover {
+    transform: scale(1.1) rotate(5deg);
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .api-card {
+        padding: 1.5rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .api-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Adjust character sizes for mobile */
+    .api-char-tennis {
+        width: clamp(50px, 10vw, 80px);
+        top: 3%;
+        right: 1%;
+        opacity: 0.7;
+    }
+
+    .api-char-basketball {
+        width: clamp(45px, 9vw, 70px);
+        top: 40%;
+        left: 0.5%;
+        opacity: 0.7;
+    }
+
+    .api-char-golf {
+        width: clamp(40px, 8vw, 65px);
+        bottom: 5%;
+        right: 1%;
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Hide some decorative elements on very small screens to reduce clutter */
+    .api-char-basketball {
+        opacity: 0.5;
+    }
+}

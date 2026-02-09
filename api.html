@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFDI Character API</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="api_page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="api-container">
+        <!-- Decorative character images -->
+        <img src="imgs/tennisball.png" 
+             alt="Tennis Ball character" 
+             class="api-decorative-char api-char-tennis" 
+             aria-label="Tennis Ball character decoration"
+             title="Tennis Ball">
+
+        <img src="imgs/basketball.png" 
+             alt="Basketball character" 
+             class="api-decorative-char api-char-basketball" 
+             aria-label="Basketball character decoration"
+             title="Basketball">
+
+        <img src="imgs/golfball.png" 
+             alt="Golf Ball character" 
+             class="api-decorative-char api-char-golf" 
+             aria-label="Golf Ball character decoration"
+             title="Golf Ball">
+
+        <a href="index.html" class="back-link">
+            <button class="api-button">← Back Home</button>
+        </a>
+
+        <div class="api-content">
+            <div class="api-header">
+                <h1>BFDI Character API</h1>
+                <p style="font-size: 1.3rem; color: var(--border-color); max-width: 700px; margin: 0 auto;">
+                    Access detailed information about all Battle for Dream Island characters in JSON format!
+                </p>
+            </div>
+
+            <div class="api-card">
+                <h2>What is this?</h2>
+                <p>
+                    This API provides structured data about BFDI characters, including their names, descriptions, badges, and image paths. Perfect for developers building BFDI-related projects or fans who want to explore character data programmatically.
+                </p>
+            </div>
+
+            <div class="api-card">
+                <h2>Features</h2>
+                <ul class="feature-list">
+                    <li>60+ BFDI characters with detailed information</li>
+                    <li>Character names, descriptions, and roles</li>
+                    <li>Image file paths for each character</li>
+                    <li>Clean JSON format for easy parsing</li>
+                    <li>Free to use for fan projects</li>
+                </ul>
+            </div>
+
+            <div class="api-card">
+                <h2>🔍 Data Structure</h2>
+                <p>Each character entry contains:</p>
+                <div class="code-block">
+{
+  "charactername": {
+    "name": "Character Display Name",
+    "badge": "Contestant/Winner/etc",
+    "desc": "Detailed character description...",
+    "image": "characterM.png"
+  }
+}
+                </div>
+            </div>
+
+            <div class="api-card">
+                <h2>Example Entry</h2>
+                <div class="code-block">
+{
+  "firey": {
+    "name": "Firey",
+    "badge": "Winner",
+    "desc": "The winner of BFDI Season 1. A flame with a fiery personality and rivalry with Coiny. Dream Island's owner.",
+    "image": "fireyM.png"
+  }
+}
+                </div>
+            </div>
+
+            <div class="api-card">
+                <h2>Get Started</h2>
+                <p>Click the button below to view the raw JSON data. You can copy the URL or save the file for use in your projects!</p>
+                <div class="button-group">
+                    <a href="searchdata.json" target="_blank" class="api-button primary">
+                        View JSON Data →
+                    </a>
+                    <a href="searchdata.json" download class="api-button">
+                        Download JSON File
+                    </a>
+                </div>
+            </div>
+
+            <div class="api-card">
+                <h2>Usage Notes</h2>
+                <p>
+                    • This data is for <strong>fan use only</strong> and is not officially affiliated with jacknjellify<br>
+                    • All character descriptions are based on the BFDI series<br>
+                    • Image paths reference local files included in this project<br>
+                    • Feel free to use this data in your own BFDI fan projects!
+                </p>
+            </div>
+
+            <div class="api-card" style="text-align: center; background: var(--accent-cyan);">
+                <h2>Need Help?</h2>
+                <p style="margin-bottom: 0;">
+                    Questions about using this API? Check out the <a href="index.html#characters" style="color: var(--accent-purple); font-weight: 800; text-decoration: underline;">characters section</a> or explore the <a href="index.html#search" style="color: var(--accent-purple); font-weight: 800; text-decoration: underline;">character search</a> to see it in action!
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

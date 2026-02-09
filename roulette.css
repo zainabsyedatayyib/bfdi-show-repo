@@ -1,0 +1,430 @@
+/* Remove white gap - reset body and html */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #3d3d3d;
+    min-height: 100vh;
+}
+
+/* Dark mode - keep all colors the same, only darken body background */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a2e;
+    }
+}
+
+/* Title - matches .main_text from style.css */
+.main_text {
+    position: absolute;
+    top: 5%;
+    left: 2%;
+    width: auto;
+    text-align: left;
+    z-index: 2;
+    font-family: var(--headerfont);
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    font-weight: 200;
+    letter-spacing: normal;
+    color: var(--maincolor);
+    text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    padding: 0;
+}
+
+/* Stats Bar */
+.stats-container {
+    position: fixed;
+    top: 20%;
+    left: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0;
+    z-index: 100;
+}
+
+.stat-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+.stat-label {
+    font-weight: 400; /* Normal weight, not bold */
+    color: var(--border-color);
+    opacity: 1;
+}
+
+.stat-number {
+    font-weight: bold;
+    min-width: 1.5rem;
+    text-align: center;
+
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Game Area */
+.game-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+}
+
+.hand-wrapper {
+    position: relative;
+    width: clamp(600px, 85vw, 1200px);
+    height: auto;
+}
+
+.hand-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: static;
+    transform: none;
+    right: auto;
+    top: auto;
+}
+
+.f_asset {
+    position: absolute;
+    width: 10%;
+    height: auto;
+    bottom: 55%;
+    right: 60%;
+    object-fit: contain;
+    z-index: 10;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 0;
+    padding: 0;
+    /* GSAP will control transform-origin for realistic rotation */
+    transform-origin: center bottom;
+}
+
+/* Credits (h6) */
+h6 {
+    position: fixed;
+    bottom: 2rem;
+    left: 1rem;
+    right: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+    z-index: 100;
+    max-width: 350px;
+    text-align: left;
+}
+
+/* Neo-Brutalist Button */
+.roulette-btn {
+    position: fixed;
+    bottom: 15%;
+    right: 5%;
+    font-family: 'Unique', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+    box-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0;
+    display: inline-block;
+    text-decoration: none;
+    z-index: 50;
+}
+
+.roulette-btn:hover {
+    background-color: #fff;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.9;
+}
+
+.roulette-btn:active {
+    transform: none;
+    box-shadow: none;
+    opacity: 0.8;
+}
+
+/* Secondary/outline variant */
+.roulette-btn--secondary {
+    background-color: #fff;
+}
+
+.roulette-btn--secondary:hover {
+    background-color: var(--accent-color);
+}
+
+/* Small variant */
+.roulette-btn--small {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    box-shadow: none;
+}
+
+.roulette-btn--small:hover {
+    box-shadow: none;
+}
+
+/* Global link styles */
+a {
+    color: #4fc3f7;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+a:hover {
+    color: #81d4fa;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #b39ddb;
+}
+
+/* Details and Summary clickable signifiers */
+details {
+    cursor: pointer;
+}
+
+summary {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+summary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+summary::before {
+    content: "▶";
+    font-size: 0.7em;
+    transition: transform 0.2s ease;
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::marker {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .main_text {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .stat-box {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    .hand-wrapper {
+        width: 140vw; /* Larger than viewport for dominant effect */
+        max-width: none;
+    }
+
+    .f_asset {
+        width: 9%;
+        bottom: 53%;  /* Moved DOWN (was 58%) */
+        right: 58%;  /* Increased by 3% (was 55%) */
+    }
+
+    h6 {
+        bottom: 1rem;
+        left: 1rem;
+        max-width: calc(100vw - 2rem);
+        font-size: 0.75rem;
+    }
+
+    .roulette-btn {
+        bottom: 25%;
+        right: 3%;
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .hand-wrapper {
+        width: 120vw;
+        max-width: none;
+    }
+
+    .f_asset {
+        width: 9%;
+        bottom: 54%;  /* Moved DOWN (was 59%) */
+        right: 59%;  /* Increased by 3% (was 56%) */
+    }
+
+    .roulette-btn {
+        bottom: 20%;
+        right: 4%;
+    }
+}
+
+@media (min-width: 768px) {
+    .stats-container {
+        top: 22%;
+        left: 2%;
+    }
+
+    .hand-wrapper {
+        width: 90vw;
+    }
+
+    .f_asset {
+        width: 10%;
+        bottom: 55%;  /* Moved DOWN (was 60%) */
+        right: 60%;  /* Increased by 3% (was 57%) */
+    }
+
+    .roulette-btn {
+        bottom: 15%;
+        right: 5%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hand-wrapper {
+        width: clamp(700px, 70vw, 1000px);
+    }
+
+    .f_asset {
+        width: 9%;
+        bottom: 56%;  /* Moved DOWN (was 61%) */
+        right: 61%;  /* Increased by 3% (was 58%) */
+    }
+
+    .roulette-btn {
+        bottom: 12%;
+        right: 8%;
+        font-size: 1.8rem;
+        padding: 1.2rem 2.5rem;
+    }
+}
+
+/* ================================
+   ANIMATION STATES
+   ================================ */
+
+/* Button disabled state during animation */
+.roulette-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Result indicators - shown briefly after landing */
+.f_asset.landed-perfect::after,
+.f_asset.landed-upside::after,
+.f_asset.landed-fallen::after {
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 100;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.f_asset.landed-perfect::after {
+    content: "PERFECT! 🎉";
+    background-color: #4CAF50;
+    color: white;
+}
+
+.f_asset.landed-upside::after {
+    content: "UPSIDE DOWN 😅";
+    background-color: var(--accent-color);
+    color: var(--border-color);
+}
+
+.f_asset.landed-fallen::after {
+    content: "FALLEN 💀";
+    background-color: #f44336;
+    color: white;
+}
+
+/* Hand wind-up glow effect */
+.hand-wrapper.winding-up .hand-img {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+/* Hand hurt flash effect (like Minecraft damage) */
+.hand-img.hurt {
+    animation: hurtFlash 0.35s ease-out;
+}
+
+@keyframes hurtFlash {
+    0% {
+        filter: brightness(1) sepia(0) saturate(1) hue-rotate(0deg);
+    }
+    15% {
+        filter: brightness(1.1) sepia(1) saturate(5) hue-rotate(-50deg);
+    }
+    30% {
+        filter: brightness(0.9) sepia(1) saturate(6) hue-rotate(-50deg);
+    }
+    100% {
+        filter: brightness(1) sepia(0) saturate(1) hue-rotate(0deg);
+    }
+}
+
+/* Ground hitbox - invisible floor at bottom of screen */
+.ground-hitbox {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px; /* Thin hitbox at the very bottom */
+    /* Uncomment below to visualize the hitbox during development */
+    /* background: rgba(255, 0, 0, 0.3); */
+    z-index: 1;
+    pointer-events: none; /* Doesn't block clicks */
+}

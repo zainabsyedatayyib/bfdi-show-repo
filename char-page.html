@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFDI Unofficial Website</title>
+    <link rel="stylesheet" href="char-page.css">
+    <!-- Import Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Added weights 100, 200, 300 for lighter text -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Character Profile Card - Horizontal layout on desktop, vertical on mobile -->
+    <div class="profile-card" id="profileCard">
+        <!-- Character Image -->
+        <div class="profile-image-wrapper" id="profileImageWrapper">
+            <img src="imgs/profily.png" alt="nothing (yet)" id="profileImage" class="profile-image">
+        </div>
+        
+        <!-- Character Info Section -->
+        <div class="profile-info" id="profileInfo">
+            <header class="profile-header">
+                <h1 class="profile-name" id="profileName">d</h1>
+                <span class="profile-badge" id="profileBadge"></span>
+            </header>
+            
+            <p class="profile-description" id="profileDescription">
+                
+            </p>
+            
+            <!-- Stats Row -->
+            <div class="profile-stats" id="profileStats">
+                <div class="stat-item" id="statEliminations">
+                    <span class="stat-value" id="statEliminationsValue"></span>
+                    <span class="stat-label">Eliminations</span>
+                </div>
+                <div class="stat-item" id="statWins">
+                    <span class="stat-value" id="statWinsValue"></span>
+                    <span class="stat-label">Wins</span>
+                </div>
+                <div class="stat-item" id="statSeasons">
+                    <span class="stat-value" id="statSeasonsValue"></span>
+                    <span class="stat-label">Seasons</span>
+                </div>
+            </div>
+            
+            <button id="seeMoreBtn" class="see-more-btn" onclick="go2link();">
+                See More
+            </button>
+        </div>
+    </div>
+    
+    <script src="char-page.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firey's Roulette</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="roulette.css">
+    <!-- GSAP Library for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+    <!-- TODO: make it a testing ground for f_roulette exclusively by hiding the rest-->
+    <!-- make hand a hitbox or smth-->
+    <header>
+        <h1 class="main_text">Firey's Roulette</h1>
+    </header>
+    <main role="main">
+        <div class="stats-container" role="rowgroup">
+            <div class="stat-box">
+                <span class="stat-label">Falls</span>
+                <div class="stat-number" id="fall-count" role="contentinfo" aria-roledescription="Score count">0</div>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Pokes</span>
+                <div class="stat-number" id="poke-count">0</div>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Perfect</span>
+                <div class="stat-number" id="success-count">0</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Button positioned near the hand -->
+    <button class="roulette-btn" id="throwBtn">Throw!</button>
+
+     <div class="game-container">
+            <!-- Ground hitbox - invisible floor at bottom of screen -->
+            <div class="ground-hitbox" id="ground"></div>
+            
+            <div class="hand-wrapper" id="handHitbox">
+                <img src="imgs/hand.png" alt="An hand reaching out to the left, holding Firey (asset)" role="img" class="hand-img">
+                <img src="imgs/f_roulette.png" alt="Firey (asset)" role="img" class="f_asset">
+            </div>
+        </div>
+    <h6>
+        <details>
+            <summary>
+                Credits
+            </summary>
+            Idea by  <a href="https://www.youtube.com/shorts/tY-_4fi0Nfw" target="_blank">Cary Huang</a>.<br>
+            Hand Photo by <a target="_blank" href="https://freerangestock.com/photographer/Skintone-Studio/5618">Skintone Studio</a> from <a target="_blank" href="https://freerangestock.com">Freerange Stock</a>
+        </details> 
+        <hr>
+        Go to <a href="index.html">homepage</a>. 
+    </h6>
+    <script src="roulette.js"></script>
+</body>
+</html>

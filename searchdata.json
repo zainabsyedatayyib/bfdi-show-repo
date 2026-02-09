@@ -1,0 +1,402 @@
+{
+    "code": 200,
+    "status": "OK",
+    "things2search": {
+        "8-ball": {
+            "name": "8-Ball",
+            "badge": "Contestant",
+            "desc": "8-Ball is a male contestant on Battle for BFDI.",
+            "image": "https://cdn.comic.studio/images/bfdiseries/characters/64727d7d1fd4851d93156d708965d908.png?filename=8ballbfdi.png"
+        },
+        "balloony": {
+            "name": "Balloony",
+            "badge": "Contestant",
+            "desc": "Balloony is a male contestant on Battle for BFDI.",
+            "image": "https://cdn.comic.studio/images/bfdiseries/characters/c8634b532e5eaa5c20ea7265fe9b6b8e.png?filename=Screenshot_2024-12-15_at_5.24.43_PM-removebg-preview.png"
+        },
+        "barfbag": {
+            "name": "Barf Bag",
+            "badge": "Contestant",
+            "desc": "Barf Bag is a female contestant on Battle for BFDI.",
+            "image": "https://cdn.comic.studio/images/bfdiseries/characters/6713c538d5812c566c41add547db37e3.png?filename=image_21.png"
+        },
+        "basketball": {
+            "name": "Basketball",
+            "badge": "Contestant",
+            "desc": "Basketball is a female contestant on Battle for BFDI.",
+            "image": "basketballM.png"
+        },
+        "bell": {
+            "name": "Bell",
+            "badge": "Contestant",
+            "desc": "Bell is a female contestant on Battle for BFDI.",
+            "image": "bellM.png"
+        },
+        "blackhole": {
+            "name": "Black Hole",
+            "badge": "Contestant",
+            "desc": "Black Hole is a male contestant on Battle for BFDI.",
+            "image": "blackholeM.png"
+        },
+        "blocky": {
+            "name": "Blocky",
+            "badge": "Contestant",
+            "desc": "Blocky is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "blockyM.png"
+        },
+        "bomby": {
+            "name": "Bomby",
+            "badge": "Contestant",
+            "desc": "Bomby is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "bombyM.png"
+        },
+        "book": {
+            "name": "Book",
+            "badge": "Contestant",
+            "desc": "Book is a female contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "bookM.png"
+        },
+        "bottle": {
+            "name": "Bottle",
+            "badge": "Contestant",
+            "desc": "Bottle is a female contestant on Battle for BFDI.",
+            "image": "bottleM.png"
+        },
+        "bracelety": {
+            "name": "Bracelety",
+            "badge": "Contestant",
+            "desc": "Bracelety is a female contestant on Battle for BFDI.",
+            "image": "braceletyM.png"
+        },
+        "bubble": {
+            "name": "Bubble",
+            "badge": "Contestant",
+            "desc": "Bubble is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "bubbleM.png"
+        },
+        "cake": {
+            "name": "Cake",
+            "badge": "Contestant",
+            "desc": "Cake is a male contestant on Battle for BFDI.",
+            "image": "cakeM.png"
+        },
+        "clock": {
+            "name": "Clock",
+            "badge": "Contestant",
+            "desc": "Clock is a male contestant on Battle for BFDI.",
+            "image": "clockM.png"
+        },
+        "cloudy": {
+            "name": "Cloudy",
+            "badge": "Contestant",
+            "desc": "Cloudy is a male contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "cloudyM.png"
+        },
+        "coiny": {
+            "name": "Coiny",
+            "badge": "Contestant",
+            "desc": "Coiny is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "coinyM.png"
+        },
+        "david": {
+            "name": "David",
+            "badge": "Contestant",
+            "desc": "David is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "davidM.png"
+        },
+        "donut": {
+            "name": "Donut",
+            "badge": "Contestant",
+            "desc": "Donut is a male contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "donutM.png"
+        },
+        "dora": {
+            "name": "Dora",
+            "badge": "Contestant",
+            "desc": "Dora is a female contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "doraM.png"
+        },
+        "eggy": {
+            "name": "Eggy",
+            "badge": "Contestant",
+            "desc": "Eggy is a female contestant on Battle for BFDI.",
+            "image": "eggyM.png"
+        },
+        "eraser": {
+            "name": "Eraser",
+            "badge": "Contestant",
+            "desc": "Eraser is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "eraserM.png"
+        },
+        "evilleafy": {
+            "name": "Evil Leafy",
+            "badge": "Contestant",
+            "desc": "Evil Leafy is a female contestant on Battle for Dream Island.",
+            "image": "evilleafyM.png"
+        },
+        "fanny": {
+            "name": "Fanny",
+            "badge": "Contestant",
+            "desc": "Fanny is a female contestant on Battle for BFDI.",
+            "image": "fannyM.png"
+        },
+        "firey": {
+            "name": "Firey",
+            "badge": "Winner",
+            "desc": "Firey is a male winner on Battle for Dream Island.",
+            "image": "fireyM.png"
+        },
+        "fireyjr": {
+            "name": "Firey Jr",
+            "badge": "Contestant",
+            "desc": "Firey Jr is a male contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "fireyjrM.png"
+        },
+        "flower": {
+            "name": "Flower",
+            "badge": "Contestant",
+            "desc": "Flower is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "flowerM.png"
+        },
+        "foldy": {
+            "name": "Foldy",
+            "badge": "Contestant",
+            "desc": "Foldy is a female contestant on Battle for BFDI.",
+            "image": "foldyM.png"
+        },
+        "fries": {
+            "name": "Fries",
+            "badge": "Contestant",
+            "desc": "Fries is a male contestant on Battle for BFDI.",
+            "image": "friesM.png"
+        },
+        "gaty": {
+            "name": "Gaty",
+            "badge": "Contestant",
+            "desc": "Gaty is a female contestant on Battle for BFDI.",
+            "image": "gatyM.png"
+        },
+        "gelatin": {
+            "name": "Gelatin",
+            "badge": "Contestant",
+            "desc": "Gelatin is a male contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "gelatinM.png"
+        },
+        "golfball": {
+            "name": "Golf Ball",
+            "badge": "Contestant",
+            "desc": "Golf Ball is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "golfballM.png"
+        },
+        "grassy": {
+            "name": "Grassy",
+            "badge": "Contestant",
+            "desc": "Grassy is a male contestant on Battle for BFDI.",
+            "image": "grassyM.png"
+        },
+        "icecube": {
+            "name": "Ice Cube",
+            "badge": "Contestant",
+            "desc": "Ice Cube is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "icecubeM.png"
+        },
+        "leafy": {
+            "name": "Leafy",
+            "badge": "Contestant",
+            "desc": "Leafy is a female contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "leafyM.png"
+        },
+        "lightning": {
+            "name": "Lightning",
+            "badge": "Contestant",
+            "desc": "Lightning is a male contestant on Battle for BFDI.",
+            "image": "lightningM.png"
+        },
+        "liy": {
+            "name": "Liy",
+            "badge": "Contestant",
+            "desc": "Liy is a female contestant on Battle for BFDI.",
+            "image": "liyM.png"
+        },
+        "lollipop": {
+            "name": "Lollipop",
+            "badge": "Contestant",
+            "desc": "Lollipop is a female contestant on Battle for BFDI.",
+            "image": "lollipopM.png"
+        },
+        "loser": {
+            "name": "Loser",
+            "badge": "Contestant",
+            "desc": "Loser is a male contestant on Battle for BFDI.",
+            "image": "loserM.png"
+        },
+        "marker": {
+            "name": "Marker",
+            "badge": "Contestant",
+            "desc": "Marker is a male contestant on Battle for BFDI.",
+            "image": "markerM.png"
+        },
+        "match": {
+            "name": "Match",
+            "badge": "Contestant",
+            "desc": "Match is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "matchM.png"
+        },
+        "naily": {
+            "name": "Naily",
+            "badge": "Contestant",
+            "desc": "Naily is a female contestant on Battle for BFDI.",
+            "image": "nailyM.png"
+        },
+        "needle": {
+            "name": "Needle",
+            "badge": "Contestant",
+            "desc": "Needle is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "needleM.png"
+        },
+        "nickel": {
+            "name": "Nickel",
+            "badge": "Contestant",
+            "desc": "Nickel is a male contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "nickelM.png"
+        },
+        "pen": {
+            "name": "Pen",
+            "badge": "Contestant",
+            "desc": "Pen is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "penM.png"
+        },
+        "pencil": {
+            "name": "Pencil",
+            "badge": "Contestant",
+            "desc": "Pencil is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "pencilM.png"
+        },
+        "pie": {
+            "name": "Pie",
+            "badge": "Contestant",
+            "desc": "Pie is a female contestant on Battle for BFDI.",
+            "image": "pieM.png"
+        },
+        "pillow": {
+            "name": "Pillow",
+            "badge": "Contestant",
+            "desc": "Pillow is a female contestant on Battle for BFDI.",
+            "image": "pillowM.png"
+        },
+        "pin": {
+            "name": "Pin",
+            "badge": "Contestant",
+            "desc": "Pin is a female contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "pinM.png"
+        },
+        "profily": {
+            "name": "Profily",
+            "badge": "Contestant",
+            "desc": "Profily is a contestant on Battle for BFDI.",
+            "image": "profilyM.png"
+        },
+        "puffball": {
+            "name": "Puffball",
+            "badge": "Contestant",
+            "desc": "Puffball is a female contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "puffballM.png"
+        },
+        "remote": {
+            "name": "Remote",
+            "badge": "Contestant",
+            "desc": "Remote is a female contestant on Battle for BFDI.",
+            "image": "remoteM.png"
+        },
+        "robotflower": {
+            "name": "Robot Flower",
+            "badge": "Contestant",
+            "desc": "Robot Flower is a female contestant on Battle for BFDI.",
+            "image": "robotflowerM.png"
+        },
+        "roboty": {
+            "name": "Roboty",
+            "badge": "Contestant",
+            "desc": "Roboty is a male contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "robotyM.png"
+        },
+        "rocky": {
+            "name": "Rocky",
+            "badge": "Contestant",
+            "desc": "Rocky is a male contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "rockyM.png"
+        },
+        "ruby": {
+            "name": "Ruby",
+            "badge": "Contestant",
+            "desc": "Ruby is a female contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "rubyM.png"
+        },
+        "saw": {
+            "name": "Saw",
+            "badge": "Contestant",
+            "desc": "Saw is a female contestant on Battle for BFDI.",
+            "image": "sawM.png"
+        },
+        "snowball": {
+            "name": "Snowball",
+            "badge": "Contestant",
+            "desc": "Snowball is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "snowballM.png"
+        },
+        "spongy": {
+            "name": "Spongy",
+            "badge": "Contestant",
+            "desc": "Spongy is a male contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "spongyM.png"
+        },
+        "stapy": {
+            "name": "Stapy",
+            "badge": "Contestant",
+            "desc": "Stapy is a male contestant on Battle for BFDI.",
+            "image": "stapyM.png"
+        },
+        "taco": {
+            "name": "Taco",
+            "badge": "Contestant",
+            "desc": "Taco is a female contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "tacoM.png"
+        },
+        "teardrop": {
+            "name": "Teardrop",
+            "badge": "Contestant",
+            "desc": "Teardrop is a female contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "teardropM.png"
+        },
+        "tennisball": {
+            "name": "Tennis Ball",
+            "badge": "Contestant",
+            "desc": "Tennis Ball is a male contestant on Battle for Dream Island, Battle for Dream Island Again, and Battle for BFDI.",
+            "image": "tennisballM.png"
+        },
+        "tree": {
+            "name": "Tree",
+            "badge": "Contestant",
+            "desc": "Tree is a male contestant on Battle for BFDI.",
+            "image": "treeM.png"
+        },
+        "tv": {
+            "name": "TV",
+            "badge": "Contestant",
+            "desc": "TV is a male contestant on Battle for BFDI.",
+            "image": "tvM.png"
+        },
+        "woody": {
+            "name": "Woody",
+            "badge": "Contestant",
+            "desc": "Woody is a male contestant on Battle for Dream Island and Battle for BFDI.",
+            "image": "woodyM.png"
+        },
+        "yellowface": {
+            "name": "Yellow Face",
+            "badge": "Contestant",
+            "desc": "Yellow Face is a male contestant on Battle for Dream Island Again and Battle for BFDI.",
+            "image": "yellowfaceM.png"
+        }
+    }
+}

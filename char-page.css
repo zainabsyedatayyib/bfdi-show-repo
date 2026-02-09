@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@font-face {
+    font-family: "Unique";
+    src: url(Unique-Medium.woff), url(Unique-Medium.woff2);
+}
+
+/* --- Global Variables (matching style.css) --- */
+:root {
+    --maincolor: white;
+    --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --defaultfont: "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --border-color: #1a1a2e;
+    --accent-color: #FFE135;
+    --accent-yellow: #FFE66D;
+    --accent-cyan: #4ECDC4;
+    --accent-purple: #C44DFF;
+    --accent-lime: #95E616;
+    --accent-orange: #FF9F43;
+    --accent-blue: #54A0FF;
+    --accent-pink: #FF6B9D;
+}
+
+/* Dark mode - keep colors same, only change backgrounds */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* All colors stay the same */
+        --bg-dark: #0f0f1a;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--defaultfont);
+    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--border-color) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* --- Profile Card Container --- */
+.profile-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    background-color: var(--accent-yellow);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 900px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Profile Image --- */
+.profile-image-wrapper {
+    position: relative;
+}
+
+.profile-image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Profile Info Section --- */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.profile-name {
+    font-family: var(--headerfont);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    color: var(--border-color);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.profile-badge {
+    background-color: var(--accent-pink);
+    color: white;
+    font-family: var(--defaultfont);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.profile-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--border-color);
+    font-weight: 400;
+}
+
+/* --- Stats Row --- */
+.profile-stats {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem 1.5rem;
+    min-width: 100px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--accent-cyan);
+}
+
+.stat-value {
+    font-family: var(--headerfont);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-purple);
+}
+
+.stat-item:hover .stat-value {
+    color: var(--border-color);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--border-color);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* --- See More Button --- */
+.see-more-btn {
+    font-family: var(--defaultfont);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--accent-lime);
+    color: var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    box-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    align-self: flex-start;
+}
+
+.see-more-btn:hover {
+    background-color: var(--accent-cyan);
+    transform: none;
+    box-shadow: none;
+    opacity: 0.9;
+}
+
+.see-more-btn:active {
+    transform: none;
+    box-shadow: none;
+    opacity: 0.8;
+}
+
+/* --- Responsive: Vertical Layout on Smaller Screens --- */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .profile-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    .profile-image-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .profile-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .profile-header {
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .profile-stats {
+        justify-content: center;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+        padding: 0.6rem 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .see-more-btn {
+        align-self: center;
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .profile-name {
+        font-size: 2rem;
+    }
+    
+    .profile-stats {
+        gap: 0.75rem;
+    }
+    
+    .stat-item {
+        min-width: 70px;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .stat-value {
+        font-size: 1.3rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+}
