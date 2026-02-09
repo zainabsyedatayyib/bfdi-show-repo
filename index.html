@@ -158,7 +158,13 @@
                         <!-- link to more info -->
                         <a href="https://en.wikipedia.org/wiki/Battle_for_Dream_Island"><button role="button">Read More</button></a>
                         
-                            <a href="https://www.youtube.com/@BFDI/playlists" target="_blank"><button id="seeSeriesBtn" role="button">See Series &#9662;</button></a>
+                        <!-- Dropdown for See Series -->
+                        <div class="dropdown">
+                            <button id="seeSeriesBtn" role="button">See Series &#9662;</button>
+                            <div id="seriesDropdown" class="dropdown-content">
+                                <a href="https://www.youtube.com/@BFDI/playlists" target="_blank">Normal</a>
+                                <button id="advancedBtn">Advanced</button>
+                            </div>
                         </div>
                     </div>
                  </div>
@@ -168,9 +174,34 @@
                     <img src="imgs/td.png" alt="Teardrop character gripping the logo" class="decorative-char char-td" aria-label="Teardrop character">
                     <img src="imgs/jnj.png" alt="Jacknjellify Logo" class="jnj-img">
                 </div>
-           
+            </div>
 
-         
+            <!-- Advanced Search Dialog -->
+            <dialog id="advancedDialog">
+                <form method="dialog">
+                    <h2 style="margin-top:0;">Find Episode</h2>
+                    <div>
+                        <label for="season">Season:</label>
+                        <select id="season" name="season" style="padding: 5px;">
+                            <option value="1">Season 1 (BFDI)</option>
+                            <option value="2">Season 2 (BFDIA)</option>
+                            <option value="3">Season 3 (IDFB)</option>
+                            <option value="4">Season 4 (BFB)</option>
+                            <option value="5">Season 5 (TPOT)</option>
+                            <option value="6">Season 6 (BFDIE)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="episode">Episode:</label>
+                        <input type="number" id="episode" name="episode" min="1" placeholder="#" style="padding: 5px; width: 60px;">
+                    </div>
+                    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:10px;">
+                        <button value="cancel" formnovalidate style="cursor:pointer;">Close</button>
+                        <button value="go" style="cursor:pointer;">Go</button>
+                    </div>
+                    <div id="link"></div>
+                </form>
+            </dialog>
 
             <!-- Wrapped aside in a container to position Ruby -->
           <br><br>
