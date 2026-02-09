@@ -265,7 +265,8 @@ function initCharacterInteractions() {
 
 function initSeriesAdvanced(){
     const l = document.getElementById("link");
-    l.innerHTML = "Aw, seriously! It's currently in progress, and we're sorry for not providing you the link. In the meantime, try clicking 'Normal'." 
+    l.innerHTML = "Aw, seriously! It's currently in progress, and we're so very sorry. In the meantime, try clicking 'Normal'. " 
 }
+
 
 
