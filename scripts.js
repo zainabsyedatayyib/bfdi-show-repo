@@ -4,7 +4,6 @@
  */
 const boxes = document.querySelectorAll(".box");
 const search_btn = document.getElementById("searchSubmitBtn");
-let connection = undefined;
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded - initializing scripts...'); // Debug log
     initNavigation();
@@ -13,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initFunFacts();
     initCharacterInteractions();
     initSeriesAdvanced();
-    connectToDatabase();
     console.log('All modules initialized'); // Debug log
 });
 
@@ -264,80 +262,10 @@ function initCharacterInteractions() {
  * Module: Series "Advanced" option Web Crawler
  * Outputs the link to a specific episode (w/ a particular number and season)
  */
-function checkIfTableExists(table){
-    const check_exists = `SELECT table_name FROM information_schema.tables WHERE table_schema = '${table}' AND table_name = '${table}';`
-    connection.query(check_exists, (result2) => {
-        if (!"links" in result2){
-            const createTable = `CREATE TABLE IF NOT EXISTS ${table}(season INT, episodeNum INT, link VARCHAR(500), playlistID INT)`;
-            try {
-                connection.query(createTable)
-                console.log("Creating table succsessful!")
-            }
-            catch (error){
-                msg = "Sorry, there's an error with something! (database table) 'Aw, seriously!' - David, BFDIA/BFB -> "+error;
-                console.log(msg);
-                l.innerHTML = msg;
-            }
-        }});
-}
 
-function findEpViaApi(){
-    // jacknjellify yt id = "UCeKLuqGciqZZ5RFYk5CbqXg
-    // jacknjellify "uploads" id = "UUeKLuqGciqZZ5RFYk5CbqXg"
-    // 
-
-    
-}
-
-function insertEpToTable(things2insert){
-    const insert = `INSERT INTO links(season, episodeNum, link, playlistID)`
-    try {
-        connection.query(insert, things2insert);
-        console.log("Database insertion succsessful!")
-    }
-    catch (error) {
-        console.log("Whoopsie! Database insertion failed: "+error)
-    } 
-}
-
-function connectToDatabase(){
-     // TODO: add mysql database
-    const request = require("mysql");
-    const connection = request.createConnection({
-        host: "",
-        user: "",
-        password: "",
-        database: "",
-        port: undefined
-    });
-    try {
-        connection.connect();
-        console.log("Connection succsessful! YOYLECAKEE! now checking if database is present...")
-    }
-    catch (error) {
-        msg = "Sorry, there's an error with something! (database connection) 'Aw, seriously!' - David, BFDIA/BFB ->  "+error;
-        console.log(msg);
-        l.innerHTML = msg;
-    }
-}
 function initSeriesAdvanced(){
     const l = document.getElementById("link");
-    const season = document.getElementById("season");
-    const episode = document.getElementById("episode")
-    connectToDatabase();
-    // optional: if table was just created, then dont check episode from there
-    const findEpisode = `SELECT link FROM links WHERE season = ${season.value} AND episodeNum = ${episode.value}`
-    connection.query(findEpisode, (result) => {
-        if (!result.startsWith("https://")){
-            checkIfTableExists("links");
-            findEpViaApi();
-            insertEpToTable();
-        }
-        else {
-            console.log("Link database retrieval succsessful! yoylecake!")
-            l.innerHTML = "Link: "+result;
-        }    
-    });
-    connection.end();
+    l.innerHTML = "Aw, seriously! It's currently in progress, and we're sorry for not providing you the link. In the meantime, try clicking 'Normal'." 
 }
+
 
