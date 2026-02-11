@@ -45,80 +45,329 @@
             </div>
 
             <div class="api-card">
-                <h2>What is this?</h2>
+                <h2>Overview</h2>
                 <p>
                     This API provides structured data about BFDI characters, including their names, descriptions, badges, and image paths. Perfect for developers building BFDI-related projects or fans who want to explore character data programmatically.
+                </p>
+                <p>
+                    <strong>Total Characters:</strong> 66 characters from the BFDI series<br>
+                    <strong>Format:</strong> JSON<br>
+                    <strong>Authentication:</strong> None required<br>
+                    <strong>Cost:</strong> Free to use
                 </p>
             </div>
 
             <div class="api-card">
                 <h2>Features</h2>
                 <ul class="feature-list">
-                    <li>60+ BFDI characters with detailed information</li>
+                    <li>66 BFDI characters with detailed information</li>
                     <li>Character names, descriptions, and roles</li>
-                    <li>Image file paths for each character</li>
+                    <li>Image URLs and file paths for each character</li>
                     <li>Clean JSON format for easy parsing</li>
+                    <li>No authentication required</li>
                     <li>Free to use for fan projects</li>
                 </ul>
             </div>
 
             <div class="api-card">
-                <h2>🔍 Data Structure</h2>
-                <p>Each character entry contains:</p>
+                <h2>🚀 Quick Start</h2>
+                <p>Access the API data directly via:</p>
+                <div class="code-block">
+URL: /characters.json
+Method: GET
+Content-Type: application/json
+                </div>
+                <p>The API returns all character data in a single JSON file - no complex endpoints needed!</p>
+            </div>
+
+            <div class="api-card">
+                <h2>Response Structure</h2>
+                <p>The API returns a JSON object with the following structure:</p>
                 <div class="code-block">
 {
-  "charactername": {
+  "code": 200,
+  "status": "OK",
+  "things2search": {
+    "character-key": {
+      "name": "Character Name",
+      "badge": "Role/Status",
+      "desc": "Description",
+      "image": "Image URL"
+    },
+    ...
+  }
+}
+                </div>
+                <p><strong>Response Fields:</strong></p>
+                <ul class="feature-list">
+                    <li><code>code</code>: HTTP status code (200 for success)</li>
+                    <li><code>status</code>: Status message (e.g., "OK")</li>
+                    <li><code>things2search</code>: Object containing all character data</li>
+                </ul>
+            </div>
+
+            <div class="api-card">
+                <h2>Character Data Structure</h2>
+                <p>Each character entry in the <code>things2search</code> object contains:</p>
+                <div class="code-block">
+{
+  "character-key": {
     "name": "Character Display Name",
     "badge": "Contestant/Winner/etc",
     "desc": "Detailed character description...",
-    "image": "characterM.png"
+    "image": "URL or path to character image"
   }
 }
                 </div>
+                <p><strong>Field Descriptions:</strong></p>
+                <ul class="feature-list">
+                    <li><code>character-key</code>: Unique identifier (lowercase, hyphenated)</li>
+                    <li><code>name</code>: Character's display name as it appears in the show</li>
+                    <li><code>badge</code>: Character status (e.g., "Contestant", "Winner")</li>
+                    <li><code>desc</code>: Detailed description of the character and their role</li>
+                    <li><code>image</code>: Absolute URL or relative file path to character image</li>
+                </ul>
             </div>
 
             <div class="api-card">
-                <h2>Example Entry</h2>
+                <h2>Example Response</h2>
+                <p>Here's a real example from the API:</p>
                 <div class="code-block">
 {
-  "firey": {
-    "name": "Firey",
-    "badge": "Winner",
-    "desc": "The winner of BFDI Season 1. A flame with a fiery personality and rivalry with Coiny. Dream Island's owner.",
-    "image": "fireyM.png"
+  "code": 200,
+  "status": "OK",
+  "things2search": {
+    "firey": {
+      "name": "Firey",
+      "badge": "Winner",
+      "desc": "Firey is a male winner on Battle for Dream Island.",
+      "image": "fireyM.png"
+    },
+    "8-ball": {
+      "name": "8-Ball",
+      "badge": "Contestant",
+      "desc": "8-Ball is a male contestant on Battle for BFDI.",
+      "image": "https://cdn.comic.studio/images/bfdiseries/characters/64727d7d1fd4851d93156d908965d908.png?filename=8ballbfdi.png"
+    },
+    "blocky": {
+      "name": "Blocky",
+      "badge": "Contestant",
+      "desc": "Blocky is a male contestant on Battle for Dream Island and Battle for BFDI.",
+      "image": "blockyM.png"
+    }
   }
 }
                 </div>
             </div>
 
             <div class="api-card">
-                <h2>Get Started</h2>
-                <p>Click the button below to view the raw JSON data. You can copy the URL or save the file for use in your projects!</p>
+                <h2>💻 Code Examples</h2>
+                
+                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">JavaScript (Fetch API)</h3>
+                <div class="code-block">
+// Fetch all character data
+fetch('characters.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log(`Status: ${data.status}`);
+    console.log(`Total characters: ${Object.keys(data.things2search).length}`);
+    
+    // Access specific character
+    const firey = data.things2search.firey;
+    console.log(`${firey.name}: ${firey.desc}`);
+    
+    // List all character names
+    Object.values(data.things2search).forEach(char => {
+      console.log(`${char.name} - ${char.badge}`);
+    });
+  })
+  .catch(error => console.error('Error:', error));
+                </div>
+
+                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">JavaScript (async/await)</h3>
+                <div class="code-block">
+async function getCharacters() {
+  try {
+    const response = await fetch('characters.json');
+    const data = await response.json();
+    
+    // Filter contestants only
+    const contestants = Object.entries(data.things2search)
+      .filter(([key, char]) => char.badge === 'Contestant');
+    
+    console.log(`Found ${contestants.length} contestants`);
+    return data.things2search;
+  } catch (error) {
+    console.error('Failed to fetch characters:', error);
+  }
+}
+
+// Search for a character by name
+async function searchCharacter(searchTerm) {
+  const characters = await getCharacters();
+  return Object.values(characters)
+    .filter(char => char.name.toLowerCase()
+      .includes(searchTerm.toLowerCase()));
+}
+                </div>
+
+                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">Python</h3>
+                <div class="code-block">
+import requests
+import json
+
+# Fetch character data (use your actual domain)
+url = 'https://example.com/characters.json'  # Replace with your domain
+# Or use relative path if running on same server
+# url = '/characters.json'
+
+response = requests.get(url)
+data = response.json()
+
+print(f"Status: {data['status']}")
+print(f"Total characters: {len(data['things2search'])}")
+
+# Access specific character
+firey = data['things2search']['firey']
+print(f"{firey['name']}: {firey['desc']}")
+
+# Search by badge
+winners = {k: v for k, v in data['things2search'].items() 
+           if v['badge'] == 'Winner'}
+print(f"Winners: {', '.join([c['name'] for c in winners.values()])}")
+                </div>
+
+                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">cURL</h3>
+                <div class="code-block">
+# Download the JSON file (replace with your domain)
+curl -O https://example.com/characters.json
+
+# View formatted output
+curl https://example.com/characters.json | json_pp
+
+# Save to file
+curl https://example.com/characters.json > characters.json
+
+# Or use relative path from the website
+curl -O /characters.json
+                </div>
+            </div>
+
+            <div class="api-card">
+                <h2>📥 Get Started</h2>
+                <p>Click the buttons below to view or download the raw JSON data. You can copy the URL or save the file for use in your projects!</p>
                 <div class="button-group">
-                    <a href="searchdata.json" target="_blank" class="api-button primary">
+                    <a href="characters.json" target="_blank" class="api-button primary">
                         View JSON Data →
                     </a>
-                    <a href="searchdata.json" download class="api-button">
+                    <a href="characters.json" download class="api-button">
                         Download JSON File
                     </a>
                 </div>
             </div>
 
             <div class="api-card">
-                <h2>Usage Notes</h2>
-                <p>
-                    • This data is for <strong>fan use only</strong> and is not officially affiliated with the actual BFDI team<br>
-                    • All character descriptions are based on the BFDI series<br>
-                    • Image paths reference local files included in this project<br>
-                    • Feel free to use this data in your own BFDI fan projects!
-                </p>
+                <h2>Common Use Cases</h2>
+                <ul class="feature-list">
+                    <li>Build a BFDI character search/filter tool</li>
+                    <li>Create a character encyclopedia or wiki</li>
+                    <li>Generate random character selectors</li>
+                    <li>Build quiz applications about BFDI characters</li>
+                    <li>Create character comparison tools</li>
+                    <li>Develop fan games or interactive experiences</li>
+                </ul>
+            </div>
+
+            <div class="api-card">
+                <h2>Best Practices</h2>
+                <ul class="feature-list">
+                    <li>Cache the JSON data locally to reduce repeated requests</li>
+                    <li>Implement error handling for network failures</li>
+                    <li>Use the character key (e.g., "firey") for lookups, not the display name</li>
+                    <li>Validate the response structure before accessing nested properties</li>
+                    <li>Consider lazy loading images for better performance</li>
+                    <li>Check the <code>code</code> field to verify successful responses (200 = OK)</li>
+                </ul>
+            </div>
+
+            <div class="api-card">
+                <h2>Troubleshooting</h2>
+                <p><strong>Q: The API request is failing / 404 error</strong></p>
+                <p>A: Make sure you're using the correct relative or absolute URL path to <code>characters.json</code>. The file is located at the root of this website.</p>
+                
+                <p style="margin-top: 1.5rem;"><strong>Q: Images are not loading</strong></p>
+                <p>A: The <code>image</code> field contains either absolute URLs (e.g., cdn.comic.studio) or relative file paths (e.g., "fireyM.png"). Check and handle both cases appropriately in your code.</p>
+                
+                <p style="margin-top: 1.5rem;"><strong>Q: How do I search for a specific character?</strong></p>
+                <p>A: You can iterate through the <code>things2search</code> object or convert it to an array. Use the character key (lowercase, hyphenated) for direct access, or search by the <code>name</code> field for display names.</p>
+                
+                <p style="margin-top: 1.5rem;"><strong>Q: Can I modify the data?</strong></p>
+                <p>A: The JSON file is read-only. You'll need to download it and host your own modified version if you need custom data.</p>
+            </div>
+
+            <div class="api-card">
+                <h2>API Reference Summary</h2>
+                <div class="code-block">
+Endpoint: /characters.json
+Method: GET
+Format: JSON
+Auth: None required
+Rate Limit: None
+
+Response Codes:
+  200 - Success
+  404 - File not found
+  
+Root Object Fields:
+  - code: number (HTTP status)
+  - status: string (status message)
+  - things2search: object (character data)
+
+Character Object Fields:
+  - name: string (required)
+  - badge: string (required)
+  - desc: string (required)
+  - image: string (required, absolute URL or relative file path)
+                </div>
+            </div>
+
+            <div class="api-card">
+                <h2>Legal & Usage Terms</h2>
+                <ul class="feature-list">
+                    <li>This data is for <strong>fan use only</strong> - not officially affiliated with jacknjellify or the BFDI team</li>
+                    <li>All character descriptions are based on the BFDI animated series</li>
+                    <li>Character images may have mixed sources (local and external CDN)</li>
+                    <li>Free to use for non-commercial BFDI fan projects</li>
+                    <li>Please provide attribution when using this API in your projects</li>
+                    <li>Respect the intellectual property of the original BFDI creators</li>
+                </ul>
+            </div>
+
+            <div class="api-card">
+                <h2>What's Next?</h2>
+                <p>Now that you understand the API, here are some ways to get started:</p>
+                <ul class="feature-list">
+                    <li>Download the JSON file using the button above</li>
+                    <li>Try the code examples in your development environment</li>
+                    <li>Check out the <a href="index.html#characters" style="color: var(--accent-purple); font-weight: 800; text-decoration: underline;">characters section</a> to see the API in action</li>
+                    <li>Explore the <a href="index.html#search" style="color: var(--accent-purple); font-weight: 800; text-decoration: underline;">character search</a> feature on our main page</li>
+                    <li>Build something awesome and share it with the BFDI community!</li>
+                </ul>
             </div>
 
             <div class="api-card" style="text-align: center; background: var(--accent-cyan);">
-                <h2>Need Help?</h2>
-                <p style="margin-bottom: 0;">
-                    Questions about using this API? Check out the <a href="index.html#characters" style="color: var(--accent-purple); font-weight: 800; text-decoration: underline;">characters section</a> or explore the <a href="index.html#search" style="color: var(--accent-purple); font-weight: 800; text-decoration: underline;">character search</a> to see it in action!
+                <h2>Questions or Feedback?</h2>
+                <p style="margin-bottom: 1.5rem;">
+                    Need help implementing the API? Have suggestions for improvements?
                 </p>
+                <form action="https://formsubmit.co/zainab.mulan@gmail.com" method="POST" style="max-width: 500px; margin: 0 auto;">
+                    <input type="hidden" name="_subject" value="BFDI API Feedback">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem;">
+                    <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem;">
+                    <textarea name="message" placeholder="Your message..." required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem; min-height: 120px; resize: vertical;"></textarea>
+                    <button type="submit" class="api-button primary" style="width: 100%; cursor: pointer;">Send Message</button>
+                </form>
             </div>
         </div>
     </div>

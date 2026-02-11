@@ -8,7 +8,7 @@ const profileName = document.getElementById('profileName');
 const profileBadge = document.getElementById('profileBadge');
 const profileDescription = document.getElementById('profileDescription');
 
-import json_data from './searchdata.json' with {type: "json"};
+import json_data from './characters.json' with {type: "json"};
 
 // Character data object
 const defaultObj = new Object ({
