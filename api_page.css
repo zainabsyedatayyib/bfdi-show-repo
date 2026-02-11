@@ -9,23 +9,6 @@
     --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
 }
 
-/* Dark mode variables */
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* Keep all colors the same as light mode */
-        --border-color: #1a1a2e;
-        --accent-yellow: #FFE66D;
-        --accent-cyan: #4ECDC4;
-        --accent-purple: #C44DFF;
-        --accent-lime: #95E616;
-        --accent-pink: #FF6B9D;
-        /* Only change overlay background */
-        --bg-overlay: rgba(15, 15, 26, 0.85);
-        --card-bg: #1a1a2e;
-        --text-primary: #1a1a2e;
-    }
-}
-
 .api-container {
     min-height: 100vh;
     background: url('imgs/bgbfdi.jpg') center/cover no-repeat;
@@ -43,12 +26,6 @@
     bottom: 0;
     background: rgba(255, 255, 255, 0.85);
     z-index: 0;
-}
-
-@media (prefers-color-scheme: dark) {
-    .api-container::before {
-        background: var(--bg-overlay, rgba(15, 15, 26, 0.85));
-    }
 }
 
 .api-content {
@@ -81,29 +58,6 @@
     margin-bottom: 2rem;
 }
 
-@media (prefers-color-scheme: dark) {
-    .api-card {
-        background: var(--card-bg, #1a1a2e);
-        color: white;
-    }
-    
-    .api-card h2 {
-        color: var(--accent-yellow);
-    }
-    
-    .api-card p {
-        color: white;
-    }
-    
-    .api-header h1 {
-        color: var(--accent-yellow);
-    }
-    
-    .api-header p {
-        color: white !important;
-    }
-}
-
 .api-card h2 {
     font-family: var(--headerfont);
     font-size: 2.5rem;
@@ -120,12 +74,6 @@
     color: var(--border-color);
 }
 
-@media (prefers-color-scheme: dark) {
-    .api-card p {
-        color: white;
-    }
-}
-
 .code-block {
     background: var(--accent-yellow);
     border: 2px solid var(--border-color);
@@ -136,12 +84,6 @@
     font-size: 1rem;
     overflow-x: auto;
     box-shadow: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    .code-block {
-        color: var(--text-primary, #f0f0f0);
-    }
 }
 
 .button-group {
@@ -204,12 +146,6 @@
     box-shadow: none;
     font-size: 1.1rem;
     font-weight: 600;
-}
-
-@media (prefers-color-scheme: dark) {
-    .feature-list li {
-        color: var(--border-color);
-    }
 }
 
 .feature-list li::before {
