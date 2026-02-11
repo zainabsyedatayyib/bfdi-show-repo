@@ -29,7 +29,6 @@
 }
 
 body {
-    font-family: var(--defaultfont);
     background: linear-gradient(135deg, var(--accent-purple) 0%, var(--border-color) 100%);
     min-height: 100vh;
     display: flex;
