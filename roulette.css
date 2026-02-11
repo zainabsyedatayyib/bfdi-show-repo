@@ -194,6 +194,23 @@ h6 {
     box-shadow: none;
 }
 
+/* Roulette-specific link styles override */
+.roulette-page a {
+    color: #4fc3f7;
+}
+
+.roulette-page a:hover {
+    color: #81d4fa;
+}
+
+.roulette-page a:visited {
+    color: #b39ddb;
+}
+
+.roulette-page summary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* Responsive */
 @media (max-width: 480px) {
     .main_text {
