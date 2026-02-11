@@ -210,8 +210,11 @@ async function searchCharacter(searchTerm) {
 import requests
 import json
 
-# Fetch character data
-url = 'https://your-domain.com/searchdata.json'
+# Fetch character data (use your actual domain)
+url = 'https://example.com/searchdata.json'  # Replace with your domain
+# Or use relative path if running on same server
+# url = '/searchdata.json'
+
 response = requests.get(url)
 data = response.json()
 
@@ -230,14 +233,17 @@ print(f"Winners: {', '.join([c['name'] for c in winners.values()])}")
 
                 <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">cURL</h3>
                 <div class="code-block">
-# Download the JSON file
-curl -O https://your-domain.com/searchdata.json
+# Download the JSON file (replace with your domain)
+curl -O https://example.com/searchdata.json
 
 # View formatted output
-curl https://your-domain.com/searchdata.json | json_pp
+curl https://example.com/searchdata.json | json_pp
 
 # Save to file
-curl https://your-domain.com/searchdata.json > characters.json
+curl https://example.com/searchdata.json > characters.json
+
+# Or use relative path from the website
+curl -O /searchdata.json
                 </div>
             </div>
 
