@@ -315,13 +315,12 @@ Auth: None required
 Rate Limit: None
 
 Response Codes:
-  200 - Success
+  200 - Success (JSON data returned)
   304 - Not Modified (cached version is still valid)
-  400 - Bad Request (malformed request)
-  403 - Forbidden (access denied)
   404 - File not found
-  500 - Internal Server Error
-  503 - Service Unavailable
+  
+Note: Other HTTP codes (e.g., 403, 500, 503) may occur depending on 
+hosting infrastructure but are not part of the API contract.
   
 Root Object Fields:
   - code: number (HTTP status)
