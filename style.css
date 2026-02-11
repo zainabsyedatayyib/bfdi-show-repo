@@ -1,9 +1,5 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 */
-@font-face {
-    font-family: "Unique";
-    src: url(Unique-Medium.woff), url(Unique-Medium.woff2);
-}
 
 /* --- Global Variables & Resets --- */
 :root {
@@ -25,23 +21,6 @@
 
 /* Dark mode color scheme */
 @media (prefers-color-scheme: dark) {
-    :root {
-        /* Keep all accent colors exactly the same as light mode */
-        --maincolor: white;
-        --border-color: #1a1a2e;
-        --accent-color: #FFE135;
-        --accent-yellow: #FFE66D;
-        --accent-cyan: #4ECDC4;
-        --accent-purple: #C44DFF;
-        --accent-lime: #95E616;
-        --accent-orange: #FF9F43;
-        --accent-blue: #54A0FF;
-        --accent-pink: #FF6B9D;
-        /* Only change background colors */
-        --bg-main: #0f0f1a;
-        --text-primary: #1a1a2e;
-    }
-    
     body {
         background: #0f0f1a;
     }
@@ -138,11 +117,6 @@
 }
 
 /* --- Global Styles --- */
-* {
-    box-sizing: border-box;
-    font-family: var(--defaultfont);
-}
-
 body {
     overflow-x: hidden;
     background: gray;
@@ -764,34 +738,6 @@ footer > * {
 }
 
 /* --- Components: Buttons & Dropdowns --- */
-button {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    padding: 0.8rem 1.5rem;
-    border: 2px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--accent-pink);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
-    box-shadow: none;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin: 5px;
-}
-
-button:active {
-    transform: none;
-    box-shadow: none;
-    opacity: 0.8;
-}
-
-button:hover {
-    background-color: var(--accent-purple);
-    opacity: 0.9;
-}
-
 .dropdown {
     position: relative;
     display: inline-block;

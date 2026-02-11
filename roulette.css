@@ -194,57 +194,21 @@ h6 {
     box-shadow: none;
 }
 
-/* Global link styles */
-a {
+/* Roulette-specific link styles override */
+.roulette-page a {
     color: #4fc3f7;
-    text-decoration: none;
-    transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
-a:hover {
+.roulette-page a:hover {
     color: #81d4fa;
-    text-decoration: underline;
 }
 
-a:visited {
+.roulette-page a:visited {
     color: #b39ddb;
 }
 
-/* Details and Summary clickable signifiers */
-details {
-    cursor: pointer;
-}
-
-summary {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-    padding: 0.25em 0.5em;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-}
-
-summary:hover {
+.roulette-page summary:hover {
     background-color: rgba(255, 255, 255, 0.1);
-}
-
-summary::before {
-    content: "▶";
-    font-size: 0.7em;
-    transition: transform 0.2s ease;
-}
-
-details[open] summary::before {
-    transform: rotate(90deg);
-}
-
-summary::-webkit-details-marker {
-    display: none;
-}
-
-summary::marker {
-    display: none;
 }
 
 /* Responsive */

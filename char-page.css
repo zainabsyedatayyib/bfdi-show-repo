@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-@font-face {
-    font-family: "Unique";
-    src: url(Unique-Medium.woff), url(Unique-Medium.woff2);
-}
-
 /* --- Global Variables (matching style.css) --- */
 :root {
     --maincolor: white;
@@ -34,13 +29,11 @@
 }
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: var(--defaultfont);
     background: linear-gradient(135deg, var(--accent-purple) 0%, var(--border-color) 100%);
     min-height: 100vh;
     display: flex;
