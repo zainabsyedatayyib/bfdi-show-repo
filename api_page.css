@@ -96,7 +96,7 @@
 .api-button {
     font-family: 'Inter', sans-serif;
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 1rem 2rem;
     border: 2px solid var(--border-color);
     border-radius: 4px;
@@ -151,7 +151,17 @@
 .feature-list li::before {
     content: "→ ";
     color: var(--accent-purple);
-    font-weight: 900;
+    font-weight: 600;
+}
+
+/* Code element styling - prevent wrapping */
+code {
+    background-color: var(--accent-yellow);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    font-size: 0.95em;
 }
 
 .back-link {
