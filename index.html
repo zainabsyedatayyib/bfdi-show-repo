@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BFDI Unofficial Website</title>
+    <meta name="description" content="Explore the world of Battle for Dream Island (BFDI) with character info, fun games like Firey's Roulette, and a character API. An unofficial fan-made website celebrating the BFDI animated series.">
+    <meta name="keywords" content="BFDI, Battle for Dream Island, characters, Firey, animation, web series, jacknjellify">
+    <meta name="author" content="Zainab Syeda Tayyab">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BFDI Unofficial Website - Battle for Dream Island Fan Site">
+    <meta property="og:description" content="Explore the world of Battle for Dream Island with character info, fun games, and more!">
+    <meta property="og:site_name" content="BFDI Unofficial Website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BFDI Unofficial Website">
+    <meta name="twitter:description" content="Explore the world of Battle for Dream Island with character info, fun games, and more!">
+    
+    <title>BFDI Unofficial Website - Battle for Dream Island Fan Site</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="style.css">
     <!-- Import Inter Font -->
@@ -13,6 +28,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <div class="grid-container" role="grid">
         
         <!-- Hero Scene Container -->
@@ -132,13 +150,13 @@
                   <li role="menuitem"><a href="#about">About</a></li>
                   <li role="menuitem"><a href="#characters">Characters</a></li>
                   <li role="menuitem"><a href="#search">Search Bar</a></li>
-                  <li role="menuitem"><a href="#doohickeys">Doohickeys</a></li>
+                  <li role="menuitem"><a href="#super-fun-stuff">Like, Super-Fun Stuff!</a></li>
                   <li role="menuitem"><a href="#credits">Credits</a></li>
                 </ul>
             </nav>
         </div>
 
-         <main role="main">
+         <main role="main" id="main-content">
         <!-- TODO https://www.w3schools.com/css/css_rwd_grid.asp
          ASSETS: 
           TODO export figma imgs -->
@@ -146,7 +164,7 @@
          <section class="about" id="about">
             <!-- Removed absolute TD from here -->
 
-            <center><h1 role="heading">Learn about it!</h1></center>
+            <h1 class="section-heading">Learn about it!</h1>
             <!-- Container for flex layout -->
             <div class="about-content">
                  <div class="about-text-column">
@@ -255,38 +273,41 @@
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. nisi veniam dicta voluptatem unde dignissimos facere, dolore assumenda adipisci neque, iusto placeat. Magni velit optio laboriosam ipsa ex facere quos tenetur hic architecto odit aliquid aspernatur non debitis accusantium illum consectetur sapiente, reiciendis eum blanditiis. Fuga aliquid vel soluta dignissimos expedita.</p>
             </aside>-->
          </section>
-         <section class="doohickeys" id="doohickeys" aria-details="The Doohickeys Section">
+         <section class="super-fun-stuff" id="super-fun-stuff" aria-label="Like, Super-Fun Stuff Section">
           <!-- Added Match and Pencil Images -->
           <img src="imgs/matchy.png" alt="Match character" class="decorative-char char-match" aria-label="Match character">
           <img src="imgs/pence_pence.png" alt="Pencil character" class="decorative-char char-pencil" aria-label="Pencil character">
 
-          <h1 role="heading" aria-roledescription="A header for the Doohickeys section">OMBB, like, super-fun doohickeys!</h1>
+          <h1>Like, Super-Fun Stuff!</h1>
           
           <div class="doohickey-grid">
             
               <div class="doohickey-item">
                   <div class="doohickey-preview">
-                    
                       <img src="imgs/roulette-prev.png" 
                            alt="Preview of Firey's Roulette game - a hand holding Firey character" 
-                           role="img"
                            aria-describedby="roulette-desc">
                   </div>
-                  <a href="./roulette.html" aria-label="Play Firey's Roulette game"><h3 id="roulette-desc">Firey's Roulette</h3></a><br><h5>Original idea from Cary Huang <a href="https://www.youtube.com/shorts/tY-_4fi0Nfw" target="_blank" rel="noopener noreferrer" aria-label="View original source video by Cary Huang">(see source)</a></h5>
+                  <a href="./roulette.html" aria-label="Play Firey's Roulette game">
+                      <h3 id="roulette-desc">Firey's Roulette</h3>
+                  </a>
+                  <p class="doohickey-description">Original idea from Cary Huang <a href="https://www.youtube.com/shorts/tY-_4fi0Nfw" target="_blank" rel="noopener noreferrer" aria-label="View original source video by Cary Huang">(see source)</a></p>
               </div>
               <div class="doohickey-item">
                   <div class="doohickey-preview">
                       <img src="imgs/apipreview.png" 
                            alt="Preview of API - JSON data icon" 
-                           role="img"
-                           aria-describedby="api-desc"
-                           style="width: 120px; height: auto;">
+                           aria-describedby="api-desc">
                   </div>
-                  <a href="./api.html" aria-label="Access BFDI Character API"><h3 id="api-desc">Character API</h3></a>
+                  <a href="./api.html" aria-label="Access BFDI Character API">
+                      <h3 id="api-desc">Character API</h3>
+                  </a>
+                  <p class="doohickey-description">Access character data via our custom API</p>
               </div>
-              <div class="doohickey-item">
+              <div class="doohickey-item doohickey-coming-soon">
                   <div class="doohickey-preview" aria-hidden="true">?</div>
-                  <h3>Quiz (Coming soon...)</h3>
+                  <h3>Quiz</h3>
+                  <p class="doohickey-description">Coming soon...</p>
               </div>
           </div>
          </section>
