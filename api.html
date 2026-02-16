@@ -98,12 +98,13 @@ Content-Type: application/json
   }
 }
                 </div>
-                <p>Response Fields:</p>
+                <p>Response Fields (when HTTP 200 is returned):</p>
                 <ul class="feature-list">
-                    <li><code>code</code>: HTTP status code (200 for success)</li>
+                    <li><code>code</code>: HTTP status code (200)</li>
                     <li><code>status</code>: Status message (e.g., "OK")</li>
                     <li><code>things2search</code>: Object containing all character data</li>
                 </ul>
+                <p><strong>Note:</strong> For HTTP 304 (Not Modified) and 404 (Not Found) responses, check the HTTP status code directly - these responses may not include a JSON body.</p>
             </div>
 
             <div class="api-card">
@@ -161,99 +162,6 @@ Content-Type: application/json
             </div>
 
             <div class="api-card">
-                <h2>💻 Code Examples</h2>
-                
-                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">JavaScript (Fetch API)</h3>
-                <div class="code-block">
-// Fetch all character data
-fetch('characters.json')
-  .then(response => response.json())
-  .then(data => {
-    console.log(`Status: ${data.status}`);
-    console.log(`Total characters: ${Object.keys(data.things2search).length}`);
-    
-    // Access specific character
-    const firey = data.things2search.firey;
-    console.log(`${firey.name}: ${firey.desc}`);
-    
-    // List all character names
-    Object.values(data.things2search).forEach(char => {
-      console.log(`${char.name} - ${char.badge}`);
-    });
-  })
-  .catch(error => console.error('Error:', error));
-                </div>
-
-                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">JavaScript (async/await)</h3>
-                <div class="code-block">
-async function getCharacters() {
-  try {
-    const response = await fetch('characters.json');
-    const data = await response.json();
-    
-    // Filter contestants only
-    const contestants = Object.entries(data.things2search)
-      .filter(([key, char]) => char.badge === 'Contestant');
-    
-    console.log(`Found ${contestants.length} contestants`);
-    return data.things2search;
-  } catch (error) {
-    console.error('Failed to fetch characters:', error);
-  }
-}
-
-// Search for a character by name
-async function searchCharacter(searchTerm) {
-  const characters = await getCharacters();
-  return Object.values(characters)
-    .filter(char => char.name.toLowerCase()
-      .includes(searchTerm.toLowerCase()));
-}
-                </div>
-
-                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">Python</h3>
-                <div class="code-block">
-import requests
-import json
-
-# Fetch character data (use your actual domain)
-url = 'https://example.com/characters.json'  # Replace with your domain
-# Or use relative path if running on same server
-# url = '/characters.json'
-
-response = requests.get(url)
-data = response.json()
-
-print(f"Status: {data['status']}")
-print(f"Total characters: {len(data['things2search'])}")
-
-# Access specific character
-firey = data['things2search']['firey']
-print(f"{firey['name']}: {firey['desc']}")
-
-# Search by badge
-winners = {k: v for k, v in data['things2search'].items() 
-           if v['badge'] == 'Winner'}
-print(f"Winners: {', '.join([c['name'] for c in winners.values()])}")
-                </div>
-
-                <h3 style="font-family: var(--headerfont); font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">cURL</h3>
-                <div class="code-block">
-# Download the JSON file (replace with your domain)
-curl -O https://example.com/characters.json
-
-# View formatted output
-curl https://example.com/characters.json | json_pp
-
-# Save to file
-curl https://example.com/characters.json > characters.json
-
-# Or use relative path from the website
-curl -O /characters.json
-                </div>
-            </div>
-
-            <div class="api-card">
                 <h2>📥 Get Started</h2>
                 <p>Click the buttons below to view or download the raw JSON data. You can copy the URL or save the file for use in your projects!</p>
                 <div class="button-group">
@@ -267,18 +175,6 @@ curl -O /characters.json
             </div>
 
             <div class="api-card">
-                <h2>Common Use Cases</h2>
-                <ul class="feature-list">
-                    <li>Build a BFDI character search/filter tool</li>
-                    <li>Create a character encyclopedia or wiki</li>
-                    <li>Generate random character selectors</li>
-                    <li>Build quiz applications about BFDI characters</li>
-                    <li>Create character comparison tools</li>
-                    <li>Develop fan games or interactive experiences</li>
-                </ul>
-            </div>
-
-            <div class="api-card">
                 <h2>Best Practices</h2>
                 <ul class="feature-list">
                     <li>Cache the JSON data locally to reduce repeated requests</li>
@@ -286,7 +182,8 @@ curl -O /characters.json
                     <li>Use the character key (e.g., "firey") for lookups, not the display name</li>
                     <li>Validate the response structure before accessing nested properties</li>
                     <li>Consider lazy loading images for better performance</li>
-                    <li>Check the <code>code</code> field to verify successful responses (200 = OK)</li>
+                    <li>Check the HTTP status code first (200 = success with JSON body, 304 = cached, 404 = not found)</li>
+                    <li>Only parse JSON and access the <code>code</code> field when HTTP status is 200</li>
                 </ul>
             </div>
 
@@ -314,18 +211,21 @@ Format: JSON
 Auth: None required
 Rate Limit: None
 
-Response Codes:
-  200 - Success (JSON data returned)
-  304 - Not Modified (cached version is still valid)
-  404 - File not found
+HTTP Response Codes:
+  200 - Success (JSON body with data returned)
+  304 - Not Modified (no body, cached version is still valid)
+  404 - File not found (no JSON body)
   
 Note: Other HTTP codes (e.g., 403, 500, 503) may occur depending on 
 hosting infrastructure but are not part of the API contract.
   
-Root Object Fields:
-  - code: number (HTTP status)
-  - status: string (status message)
+Root Object Fields (only present when HTTP 200):
+  - code: number (200)
+  - status: string (status message, e.g., "OK")
   - things2search: object (character data)
+  
+IMPORTANT: Always check HTTP status code first. Only 200 responses 
+include a JSON body. Do not attempt to parse JSON for 304/404 responses.
 
 Character Object Fields:
   - name: string (required)
@@ -353,25 +253,9 @@ Character Object Fields:
                 <ul class="feature-list">
                     <li>Download the JSON file using the button above</li>
                     <li>Try the code examples in your development environment</li>
-                    <li>Check out the <a href="index.html#characters" style="color: var(--accent-purple); text-decoration: underline;">characters section</a> to see the API in action</li>
-                    <li>Explore the <a href="index.html#search" style="color: var(--accent-purple); text-decoration: underline;">character search</a> feature on our main page</li>
+                    <li>Check out the <a href="index.html#characters" style="color: var(--accent-purple); text-decoration: underline;">characters section</a> and <a href="index.html#search" style="color: var(--accent-purple); text-decoration: underline;">search section</a> to see the API in action</li>
                     <li>Build something awesome and share it with the BFDI community!</li>
                 </ul>
-            </div>
-
-            <div class="api-card" style="text-align: center; background: var(--accent-cyan);">
-                <h2>Questions or Feedback?</h2>
-                <p style="margin-bottom: 1.5rem;">
-                    Need help implementing the API? Have suggestions for improvements? Have you got something to share that you have made with the API?
-                </p>
-                <form action="https://formsubmit.co/zainab.mulan@gmail.com" method="POST" style="max-width: 500px; margin: 0 auto;">
-                    <input type="hidden" name="_subject" value="BFDI API Feedback">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem;">
-                    <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem;">
-                    <textarea name="message" placeholder="Your message..." required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem; min-height: 120px; resize: vertical;"></textarea>
-                    <button type="submit" class="api-button primary" style="width: 100%; cursor: pointer;">Send Message</button>
-                </form>
             </div>
         </div>
     </div>
