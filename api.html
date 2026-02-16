@@ -98,12 +98,13 @@ Content-Type: application/json
   }
 }
                 </div>
-                <p>Response Fields:</p>
+                <p>Response Fields (when HTTP 200 is returned):</p>
                 <ul class="feature-list">
-                    <li><code>code</code>: HTTP status code (200 for success)</li>
+                    <li><code>code</code>: HTTP status code (always 200 in JSON body)</li>
                     <li><code>status</code>: Status message (e.g., "OK")</li>
                     <li><code>things2search</code>: Object containing all character data</li>
                 </ul>
+                <p><strong>Note:</strong> For HTTP 304 (Not Modified) and 404 (Not Found) responses, check the HTTP status code directly - these responses may not include a JSON body.</p>
             </div>
 
             <div class="api-card">
@@ -286,7 +287,8 @@ curl -O /characters.json
                     <li>Use the character key (e.g., "firey") for lookups, not the display name</li>
                     <li>Validate the response structure before accessing nested properties</li>
                     <li>Consider lazy loading images for better performance</li>
-                    <li>Check the <code>code</code> field to verify successful responses (200 = OK)</li>
+                    <li>Check the HTTP status code first (200 = success with JSON body, 304 = cached, 404 = not found)</li>
+                    <li>Only parse JSON and access the <code>code</code> field when HTTP status is 200</li>
                 </ul>
             </div>
 
@@ -314,18 +316,21 @@ Format: JSON
 Auth: None required
 Rate Limit: None
 
-Response Codes:
-  200 - Success (JSON data returned)
-  304 - Not Modified (cached version is still valid)
-  404 - File not found
+HTTP Response Codes:
+  200 - Success (JSON body with data returned)
+  304 - Not Modified (no body, cached version is still valid)
+  404 - File not found (no JSON body)
   
 Note: Other HTTP codes (e.g., 403, 500, 503) may occur depending on 
 hosting infrastructure but are not part of the API contract.
   
-Root Object Fields:
-  - code: number (HTTP status)
-  - status: string (status message)
+Root Object Fields (only present when HTTP 200):
+  - code: number (always 200 in JSON body)
+  - status: string (status message, e.g., "OK")
   - things2search: object (character data)
+  
+IMPORTANT: Always check HTTP status code first. Only 200 responses 
+include a JSON body. Do not attempt to parse JSON for 304/404 responses.
 
 Character Object Fields:
   - name: string (required)
@@ -357,21 +362,6 @@ Character Object Fields:
                     <li>Explore the <a href="index.html#search" style="color: var(--accent-purple); text-decoration: underline;">character search</a> feature on our main page</li>
                     <li>Build something awesome and share it with the BFDI community!</li>
                 </ul>
-            </div>
-
-            <div class="api-card" style="text-align: center; background: var(--accent-cyan);">
-                <h2>Questions or Feedback?</h2>
-                <p style="margin-bottom: 1.5rem;">
-                    Need help implementing the API? Have suggestions for improvements? Have you got something to share that you have made with the API?
-                </p>
-                <form action="https://formsubmit.co/zainab.mulan@gmail.com" method="POST" style="max-width: 500px; margin: 0 auto;">
-                    <input type="hidden" name="_subject" value="BFDI API Feedback">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem;">
-                    <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem;">
-                    <textarea name="message" placeholder="Your message..." required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem; min-height: 120px; resize: vertical;"></textarea>
-                    <button type="submit" class="api-button primary" style="width: 100%; cursor: pointer;">Send Message</button>
-                </form>
             </div>
         </div>
     </div>
