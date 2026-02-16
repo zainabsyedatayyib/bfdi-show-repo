@@ -10,7 +10,7 @@
 :root {
     --maincolor: white;
     --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
-    --defaultfont: "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --defaultfont: "Helvetica", "Trebuchet MS", "Arial", sans-serif;
     --border-color: #1a1a2e;
     --accent-color: #FFE135;
     --accent-yellow: #FFE66D;
@@ -26,6 +26,7 @@
 /* --- Global Resets --- */
 * {
     box-sizing: border-box;
+    letter-spacing: 0.02em;
 }
 
 body {
@@ -34,7 +35,6 @@ body {
 
 /* --- Global Button Styles --- */
 button {
-    font-family: 'Inter', sans-serif;
     font-size: 1.3rem;
     font-weight: 600;
     padding: 0.8rem 1.5rem;
