@@ -100,7 +100,7 @@ Content-Type: application/json
                 </div>
                 <p>Response Fields (when HTTP 200 is returned):</p>
                 <ul class="feature-list">
-                    <li><code>code</code>: HTTP status code (always 200 in JSON body)</li>
+                    <li><code>code</code>: HTTP status code (200)</li>
                     <li><code>status</code>: Status message (e.g., "OK")</li>
                     <li><code>things2search</code>: Object containing all character data</li>
                 </ul>
@@ -325,7 +325,7 @@ Note: Other HTTP codes (e.g., 403, 500, 503) may occur depending on
 hosting infrastructure but are not part of the API contract.
   
 Root Object Fields (only present when HTTP 200):
-  - code: number (always 200 in JSON body)
+  - code: number (200)
   - status: string (status message, e.g., "OK")
   - things2search: object (character data)
   
