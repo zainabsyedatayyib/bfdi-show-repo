@@ -29,8 +29,15 @@
     letter-spacing: 0.02em;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     font-family: var(--defaultfont);
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 /* --- Global Button Styles --- */
