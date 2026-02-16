@@ -6,7 +6,7 @@ This document explains all the responsive improvements made to the BFDI Show Rep
 ## Changes Made
 
 ### 1. Global Overflow Fix
-**Issue**: User requested `overflow-x: none` (which doesn't exist in CSS)
+**Issue**: User requested preventing horizontal overflow/scrolling
 **Solution**: Added `overflow-x: hidden` to prevent horizontal scrolling on all pages
 
 **Files Modified**:
