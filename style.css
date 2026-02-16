@@ -101,6 +101,10 @@
         background-color: var(--accent-cyan);
     }
     
+    .doohickey-coming-soon:hover {
+        background-color: var(--accent-yellow);
+    }
+    
     .stat-box {
         background-color: var(--accent-yellow);
     }
@@ -741,6 +745,7 @@ aside img {
 
 .doohickey-coming-soon:hover {
     transform: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
 }
 
