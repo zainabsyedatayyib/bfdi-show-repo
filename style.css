@@ -1366,7 +1366,7 @@ dialog::backdrop {
     z-index: 25;
 }
 
-.char-nickle {
+.char-nickel {
     bottom: 2%;
     right: 2%;
     width: clamp(50px, 10vw, 100px);
@@ -1451,7 +1451,7 @@ dialog::backdrop {
         left: 1%;
     }
     
-    .char-nickle {
+    .char-nickel {
         width: clamp(40px, 8vw, 80px);
     }
     
