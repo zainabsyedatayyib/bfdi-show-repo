@@ -42,6 +42,20 @@ body {
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    overflow-x: hidden;
+}
+
+/* Responsive body padding */
+@media (max-width: 768px) {
+    body {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
 }
 
 /* --- Profile Card Container --- */

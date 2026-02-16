@@ -211,7 +211,7 @@
          <section class="characters" id="characters">
             <!-- Added GNG and Nickel Images -->
             <img src="imgs/gng.png" alt="Gelatin and Needle characters" class="decorative-char char-gng" aria-label="Grass and Greeny characters">
-            <img src="imgs/nick_le.png" alt="Nickel character" class="decorative-char char-nickle" aria-label="Nickel character">
+            <img src="imgs/nick_le.png" alt="Nickel character" class="decorative-char char-nickel" aria-label="Nickel character">
 
             <h1 role="heading">Yeah, who? I wanna know!</h1>
             <div class="bento" role="grid" aria-roledescription="a bento grid, which is a specific type of grid">
@@ -318,22 +318,22 @@
             </div>
           </section>
 
-          <section class="contact-form" style="text-align: center; padding: 2rem 1rem; background: var(--accent-cyan, #4ECDC4); margin: 2rem auto; max-width: 600px; border-radius: 8px;">
-            <h2 style="font-family: var(--headerfont, 'Helvetica', sans-serif); margin-bottom: 1rem;">Questions or Feedback?</h2>
-            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+          <section class="contact-form">
+            <h2>Questions or Feedback?</h2>
+            <p>
                 Have anything to say? Made something cool with the API? Want to win Dream Island? Let's talk!
             </p>
             <!-- Security: Using FormSubmit hash endpoint instead of direct email to prevent scraping.
                  To activate: Submit form once with your email, verify via confirmation email, 
                  then FormSubmit will generate a unique hash to replace in the action URL -->
-            <form action="https://formsubmit.co/01eb7b63398a9bcb6b6b7b06ff3c5991" method="POST" style="max-width: 500px; margin: 0 auto;">
+            <form action="https://formsubmit.co/01eb7b63398a9bcb6b6b7b06ff3c5991" method="POST">
                 <!-- Replace YOUR_FORMSUBMIT_HASH with the hash from FormSubmit after email verification -->
                 <input type="hidden" name="_subject" value="BFDI Website Contact">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color, #333); border-radius: 4px; font-family: 'Helvetica', sans-serif; font-size: 1rem;">
-                <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color, #333); border-radius: 4px; font-family: 'Helvetica', sans-serif; font-size: 1rem;">
-                <textarea name="message" placeholder="Your message..." required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color, #333); border-radius: 4px; font-family: 'Helvetica', sans-serif; font-size: 1rem; min-height: 120px; resize: vertical;"></textarea>
-                <button type="submit" style="width: 100%; cursor: pointer; padding: 0.8rem; background: var(--accent-purple, #9B59B6); color: white; border: none; border-radius: 4px; font-size: 1.1rem; font-weight: bold; font-family: 'Helvetica', sans-serif;">Send Message</button>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your message..." required></textarea>
+                <button type="submit">Send Message</button>
             </form>
           </section>
 
