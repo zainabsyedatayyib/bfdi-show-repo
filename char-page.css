@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Helvetica:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 /* --- Global Variables (matching style.css) --- */
 :root {
     --maincolor: white;
-    --headerfont: "Unique", "Impact", "Helvetica", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
-    --defaultfont: "Helvetica", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --headerfont: "Unique", "Impact", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --defaultfont: "Helvetica", "Trebuchet MS", "Arial", sans-serif;
     --border-color: #1a1a2e;
     --accent-color: #FFE135;
     --accent-yellow: #FFE66D;

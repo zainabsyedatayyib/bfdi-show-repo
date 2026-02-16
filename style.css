@@ -1,8 +1,8 @@
 /* --- Global Variables & Resets --- */
 :root {
     --maincolor: white;
-    --headerfont: "Unique", "Impact", "Helvetica", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
-    --defaultfont: "Helvetica", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --headerfont: "Unique", "Impact", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --defaultfont: "Helvetica", "Trebuchet MS", "Arial", sans-serif;
     --border-color: #1a1a2e;
     --accent-color: #FFE135;
     --accent-yellow: #FFE66D;
