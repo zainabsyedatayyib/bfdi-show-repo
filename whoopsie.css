@@ -110,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .whoopsie-box p {
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.3rem;
     line-height: 1.6;
     color: var(--border-color);
@@ -144,7 +144,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .whoopsie-actions button,
 .whoopsie-actions a {
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.3rem;
     font-weight: 700;
     padding: 1rem 2rem;

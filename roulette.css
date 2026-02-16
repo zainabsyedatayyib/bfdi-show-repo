@@ -132,7 +132,7 @@ h6 {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem 1.5rem;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 0.85rem;
     line-height: 1.5;
     margin: 0;
@@ -328,7 +328,7 @@ h6 {
 .f_asset.landed-upside::after,
 .f_asset.landed-fallen::after {
     position: absolute;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-weight: 700;
     font-size: 1rem;
     padding: 0.3rem 0.6rem;

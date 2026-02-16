@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .api-button {
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.3rem;
     font-weight: 600;
     padding: 1rem 2rem;

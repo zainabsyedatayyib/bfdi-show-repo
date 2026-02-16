@@ -284,7 +284,7 @@ nav ul {
 }
 
 nav li {
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     color: var(--border-color);
     font-size: clamp(1.2rem, 2.5vw, 1.8rem);
     font-weight: 400;
@@ -410,7 +410,7 @@ aside {
     border: 2px solid var(--border-color);
     border-radius: 8px;
     background-color: var(--accent-cyan);
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -516,7 +516,7 @@ aside img {
     border: none;
     border-top: 4px solid var(--border-color);
     box-shadow: none;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-weight: 800;
     color: var(--border-color);
     text-transform: uppercase;
@@ -579,7 +579,7 @@ aside img {
 }
 
 #searchInput {
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.5rem;
     padding: 1rem 1.5rem;
     border: 2px solid var(--border-color);
@@ -612,7 +612,7 @@ aside img {
     transition: all 0.2s ease;
     cursor: pointer;
     text-transform: uppercase;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
 }
 
 #searchSubmitBtn:hover {
@@ -736,7 +736,7 @@ aside img {
     margin: 0;
     text-align: center;
     line-height: 1.4;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
 }
 
 .doohickey-coming-soon {
@@ -757,7 +757,7 @@ footer {
     color: var(--border-color);
     padding: 4rem 2rem;
     text-align: center;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
 }
 
 footer::before {
@@ -858,7 +858,7 @@ footer > * {
     width: 100%;
     text-align: left;
     cursor: pointer;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.1rem;
     font-weight: 400;
     box-shadow: none;
@@ -1023,7 +1023,7 @@ dialog::backdrop {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.2rem;
     font-weight: 700;
     color: white;
@@ -1051,7 +1051,7 @@ h6 {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 1.5rem 2rem;
-    font-family: 'Helvetica', sans-serif;
+    font-family: var(--defaultfont);
     font-size: clamp(1rem, 1.5vw, 1.3rem);
     line-height: 1.6;
     margin: 0;
