@@ -4,8 +4,8 @@
 /* --- Global Variables & Resets --- */
 :root {
     --maincolor: white;
-    --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
-    --defaultfont:  "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --headerfont: "Unique", "Impact", "Helvetica", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --defaultfont: "Helvetica", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
     --border-color: #1a1a2e;
     --accent-color: #FFE135;
     --accent-yellow: #FFE66D;
@@ -163,6 +163,10 @@ h1 {
     letter-spacing: 0.04em;
 }
 
+h2, h3, h4, h5, h6 {
+    font-weight: lighter;
+}
+
 /* --- Hero Scene --- */
 .hero-scene {
     position: relative;
@@ -182,7 +186,7 @@ h1 {
     font-family: var(--headerfont);
     font-size: clamp(10rem, 25vw, 40rem);
     line-height: 0.8;
-    font-weight: 200;
+    font-weight: lighter;
     letter-spacing: normal;
     color: var(--maincolor);
     text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.8);
@@ -283,7 +287,7 @@ nav ul {
 }
 
 nav li {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     color: var(--border-color);
     font-size: clamp(1.2rem, 2.5vw, 1.8rem);
     font-weight: 400;
@@ -409,7 +413,7 @@ aside {
     border: 2px solid var(--border-color);
     border-radius: 8px;
     background-color: var(--accent-cyan);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -515,7 +519,7 @@ aside img {
     border: none;
     border-top: 4px solid var(--border-color);
     box-shadow: none;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-weight: 800;
     color: var(--border-color);
     text-transform: uppercase;
@@ -578,7 +582,7 @@ aside img {
 }
 
 #searchInput {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 1.5rem;
     padding: 1rem 1.5rem;
     border: 2px solid var(--border-color);
@@ -611,7 +615,7 @@ aside img {
     transition: all 0.2s ease;
     cursor: pointer;
     text-transform: uppercase;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
 }
 
 #searchSubmitBtn:hover {
@@ -735,7 +739,7 @@ aside img {
     margin: 0;
     text-align: center;
     line-height: 1.4;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
 }
 
 .doohickey-coming-soon {
@@ -756,7 +760,7 @@ footer {
     color: var(--border-color);
     padding: 4rem 2rem;
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
 }
 
 footer::before {
@@ -857,7 +861,7 @@ footer > * {
     width: 100%;
     text-align: left;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 1.1rem;
     font-weight: 400;
     box-shadow: none;
@@ -1022,7 +1026,7 @@ dialog::backdrop {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
     color: white;
@@ -1050,7 +1054,7 @@ h6 {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 1.5rem 2rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     font-size: clamp(1rem, 1.5vw, 1.3rem);
     line-height: 1.6;
     margin: 0;
