@@ -327,7 +327,11 @@
             <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
                 Need help? Have suggestions? Made something cool with the API, or want to win Dream Island? Let's talk!
             </p>
-            <form action="https://formsubmit.co/zainab.mulan@gmail.com" method="POST" style="max-width: 500px; margin: 0 auto;">
+            <!-- Security: Using FormSubmit hash endpoint instead of direct email to prevent scraping.
+                 To activate: Submit form once with your email, verify via confirmation email, 
+                 then FormSubmit will generate a unique hash to replace in the action URL -->
+            <form action="https://formsubmit.co/YOUR_FORMSUBMIT_HASH" method="POST" style="max-width: 500px; margin: 0 auto;">
+                <!-- Replace YOUR_FORMSUBMIT_HASH with the hash from FormSubmit after email verification -->
                 <input type="hidden" name="_subject" value="BFDI Website Contact">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 2px solid var(--border-color, #333); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 1rem;">
