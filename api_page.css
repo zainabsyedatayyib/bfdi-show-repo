@@ -6,7 +6,11 @@
     --accent-purple: #C44DFF;
     --accent-lime: #95E616;
     --accent-pink: #FF6B9D;
-    --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --headerfont: "Unique", "Impact", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
 }
 
 .api-container {
@@ -94,7 +98,7 @@
 }
 
 .api-button {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.3rem;
     font-weight: 600;
     padding: 1rem 2rem;

@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 /* --- Global Variables (matching style.css) --- */
 :root {
     --maincolor: white;
-    --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
-    --defaultfont: "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --headerfont: "Unique", "Impact", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --defaultfont: "Helvetica", "Trebuchet MS", "Arial", sans-serif;
     --border-color: #1a1a2e;
     --accent-color: #FFE135;
     --accent-yellow: #FFE66D;
@@ -14,6 +12,10 @@
     --accent-orange: #FF9F43;
     --accent-blue: #54A0FF;
     --accent-pink: #FF6B9D;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
 }
 
 /* Dark mode - keep colors same, only change backgrounds */

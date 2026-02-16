@@ -5,7 +5,11 @@
     --accent-lime: #95E616;
     --accent-pink: #FF6B9D;
     --accent-purple: #C44DFF;
-    --headerfont: "Unique", "Impact", "Inter", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+    --headerfont: "Unique", "Impact", "Helvetica", "Trebuchet MS", "Arial", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
 }
 
 /* Dark mode variables */
@@ -106,7 +110,7 @@
 }
 
 .whoopsie-box p {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.3rem;
     line-height: 1.6;
     color: var(--border-color);
@@ -140,7 +144,7 @@
 
 .whoopsie-actions button,
 .whoopsie-actions a {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 1.3rem;
     font-weight: 700;
     padding: 1rem 2rem;

@@ -9,6 +9,10 @@ body {
     min-height: 100vh;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
+}
+
 /* Dark mode - keep all colors the same, only darken body background */
 @media (prefers-color-scheme: dark) {
     body {
@@ -27,7 +31,7 @@ body {
     font-family: var(--headerfont);
     font-size: clamp(4rem, 12vw, 10rem);
     line-height: 0.9;
-    font-weight: 200;
+    font-weight: lighter;
     letter-spacing: normal;
     color: var(--maincolor);
     text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.8);
@@ -128,7 +132,7 @@ h6 {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem 1.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--defaultfont);
     font-size: 0.85rem;
     line-height: 1.5;
     margin: 0;
@@ -324,7 +328,7 @@ h6 {
 .f_asset.landed-upside::after,
 .f_asset.landed-fallen::after {
     position: absolute;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--defaultfont);
     font-weight: 700;
     font-size: 1rem;
     padding: 0.3rem 0.6rem;
