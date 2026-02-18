@@ -191,6 +191,41 @@
                 </div>
             </div>
 
+            <!-- Advanced Series Search Dialog -->
+            <dialog id="advancedDialog" aria-labelledby="advancedDialogTitle">
+                <h2 id="advancedDialogTitle">Find an Episode</h2>
+                <p>Search for a specific episode by selecting a season and entering an episode name or number.</p>
+                
+                <form id="advancedSearchForm">
+                    <div class="form-group">
+                        <label for="seasonSelect">Season:</label>
+                        <select id="seasonSelect" name="season" required>
+                            <option value="" disabled selected>Select a season...</option>
+                            <option value="1">Season 1 - BFDI</option>
+                            <option value="2">Season 2 - BFDIA</option>
+                            <option value="3">Season 3 - IDFB</option>
+                            <option value="4">Season 4 - BFB (Pre-Split)</option>
+                            <option value="5">Season 5 - BFB (Post-Split)</option>
+                            <option value="6">Season 6 - TPOT</option>
+                            <option value="7">Season 7 - BFDIE</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="episode">Episode:</label>
+                        <input type="text" id="episode" name="episode" placeholder="e.g., 1, 2a, Take the Plunge" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" id="advancedSearchBtn">Search</button>
+                        <button type="button" id="closeDialogBtn">Close</button>
+                    </div>
+                </form>
+                
+                <div class="episode-result">
+                    <p id="link">Your episode link will appear here.</p>
+                </div>
+            </dialog>
 
             <!-- Wrapped aside in a container to position Ruby -->
           <br><br>

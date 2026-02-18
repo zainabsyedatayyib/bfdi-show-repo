@@ -108,6 +108,7 @@ function initDropdowns() {
 function initDialogs() {
     const advancedBtn = document.getElementById('advancedBtn');
     const advancedDialog = document.getElementById('advancedDialog');
+    const closeDialogBtn = document.getElementById('closeDialogBtn');
 
     if (advancedBtn && advancedDialog) {
         console.log('Dialog elements found');
@@ -122,6 +123,21 @@ function initDialogs() {
             }
             advancedDialog.showModal();
             console.log('Dialog opened');
+        });
+
+        // Close dialog button handler
+        if (closeDialogBtn) {
+            closeDialogBtn.addEventListener('click', () => {
+                advancedDialog.close();
+                console.log('Dialog closed');
+            });
+        }
+
+        // Close dialog when clicking on backdrop (outside the dialog)
+        advancedDialog.addEventListener('click', (e) => {
+            if (e.target === advancedDialog) {
+                advancedDialog.close();
+            }
         });
     } else {
         console.error('Dialog elements not found:', { advancedBtn, advancedDialog });
@@ -635,7 +651,7 @@ function isValidDatabaseResult(result) {
  */
 function initSeriesAdvanced() {
     const linkElement = document.getElementById("link");
-    const seasonSelect = document.querySelector("select"); // Get season dropdown
+    const seasonSelect = document.getElementById("seasonSelect"); // Get season dropdown by specific ID
     const episodeInput = document.getElementById("episode"); // Get episode input
     const searchForm = document.getElementById("advancedSearchForm"); // Form element
     
