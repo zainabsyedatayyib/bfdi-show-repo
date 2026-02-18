@@ -176,6 +176,7 @@ h2, h3, h4, h5, h6 {
     min-height: 500px;
     width: 100%;
     overflow: hidden;
+    padding-bottom: 6rem;
 }
 
 .main_text {
@@ -244,7 +245,7 @@ h2, h3, h4, h5, h6 {
 /* --- Hero Characters --- */
 .characters-container {
     position: absolute;
-    bottom: 14%;
+    bottom: 20%;
     left: 5%;
     width: 90%;
     max-width: 1400px;
@@ -258,7 +259,7 @@ h2, h3, h4, h5, h6 {
 /* Responsive character container */
 @media (max-width: 768px) {
     .characters-container {
-        bottom: 12%;
+        bottom: 18%;
         left: 3%;
         width: 94%;
     }
@@ -266,7 +267,7 @@ h2, h3, h4, h5, h6 {
 
 @media (max-width: 480px) {
     .characters-container {
-        bottom: 10%;
+        bottom: 16%;
         left: 2%;
         width: 96%;
     }
@@ -303,7 +304,7 @@ h2, h3, h4, h5, h6 {
 /* --- Navigation (Neo-Brutalist) --- */
 nav {
     position: absolute;
-    bottom: -10%;
+    bottom: 2%;
     width: 100%;
     z-index: 100;
     text-align: center;
@@ -464,12 +465,14 @@ section {
 @media (max-width: 1024px) {
     .about {
         padding: 5rem 1.5rem;
+        margin-top: 6rem;
     }
 }
 
 @media (max-width: 768px) {
     .about {
         padding: 4rem 1rem;
+        margin-top: 5rem;
     }
     
     .about h1 {
@@ -1446,11 +1449,6 @@ dialog::backdrop {
         top: 10%;
         width: clamp(70px, 13vw, 140px);
     }
-    
-    .about {
-        padding: 5rem 1.5rem;
-        margin-top: 6rem;
-    }
 }
 
 @media (max-width: 768px) {
@@ -1488,11 +1486,6 @@ dialog::backdrop {
     .char-evilleafy {
         width: clamp(35px, 7vw, 65px);
         opacity: 0.8;
-    }
-    
-    .about {
-        padding: 4rem 1rem;
-        margin-top: 5rem;
     }
 }
 
@@ -1715,7 +1708,7 @@ summary::marker {
 @media (min-width: 1024px) {
     .characters-container {
         width: 60%;
-        bottom: 8%;
+        bottom: 14%;
     }
 }
 
