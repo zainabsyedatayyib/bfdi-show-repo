@@ -328,20 +328,34 @@ function initCharacterInteractions() {
 // Module-level database connection variable (FIX #1: moved outside function for proper scope)
 let dbConnection = null;
 
+// Allowlist of valid table names to prevent SQL injection in DDL
+const ALLOWED_TABLES = ['links'];
+
 /**
  * Ensures the 'links' table exists, creates it if not
- * @param {string} table - The table name to check/create
+ * @param {string} table - The table name to check/create (must be in ALLOWED_TABLES)
  * @param {HTMLElement} outputElement - Element to display error messages (FIX #3)
  */
 function ensureTableExists(table, outputElement) {
+    // Validate table name against allowlist to prevent SQL injection
+    if (!ALLOWED_TABLES.includes(table)) {
+        console.error(`Invalid table name attempted: ${table}`);
+        if (outputElement) {
+            outputElement.textContent = "An error occurred. Please try again later.";
+        }
+        return;
+    }
+    
     // FIX #10: Use parameterized query placeholder (? instead of template literal)
     const check_exists = `SELECT table_name FROM information_schema.tables WHERE table_schema = ? AND table_name = ?;`;
     
     dbConnection.query(check_exists, [table, table], (error, result2) => {
         if (error) {
-            const msg = "Sorry, there's an error checking the table! 'Aw, seriously!' - David -> " + error;
-            console.error(msg);
-            if (outputElement) outputElement.innerHTML = msg;
+            // Log detailed error internally, show generic message to user
+            console.error("Database table check error:", error);
+            if (outputElement) {
+                outputElement.textContent = "An error occurred. Please try again later.";
+            }
             return;
         }
         
@@ -349,7 +363,8 @@ function ensureTableExists(table, outputElement) {
         // Original: !"links" in result2 (WRONG - evaluates as: false in result2)
         // Fixed: Check if result is empty (table doesn't exist)
         if (!result2 || result2.length === 0) {
-            const createTable = `CREATE TABLE IF NOT EXISTS ${table} (
+            // Table name is validated above, safe to use in DDL
+            const createTable = `CREATE TABLE IF NOT EXISTS links (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 season INT NOT NULL,
                 episodeNum INT NOT NULL,
@@ -359,11 +374,13 @@ function ensureTableExists(table, outputElement) {
             
             dbConnection.query(createTable, (createError) => {
                 if (createError) {
-                    const msg = "Sorry, there's an error creating the table! 'Aw, seriously!' - David -> " + createError;
-                    console.error(msg);
-                    if (outputElement) outputElement.innerHTML = msg;
+                    // Log detailed error internally, show generic message to user
+                    console.error("Database table creation error:", createError);
+                    if (outputElement) {
+                        outputElement.textContent = "An error occurred. Please try again later.";
+                    }
                 } else {
-                    console.log("Creating table successful!"); // FIX: typo "succsessful" -> "successful"
+                    console.log("Creating table successful!");
                 }
             });
         }
@@ -399,7 +416,42 @@ const playlist4Season = (seasonSelected) => {
 };
 
 /**
- * Fetches episode link from YouTube API
+ * Validates that a YouTube video URL is safe (matches expected YouTube URL pattern)
+ * @param {string} url - URL to validate
+ * @returns {boolean} - True if URL is a valid YouTube video URL
+ */
+function isValidYouTubeUrl(url) {
+    if (!url || typeof url !== 'string') return false;
+    // Only allow YouTube video URLs with expected format
+    const youtubePattern = /^https:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}$/;
+    return youtubePattern.test(url);
+}
+
+/**
+ * Safely creates a link element (avoids XSS by not using innerHTML with external data)
+ * @param {HTMLElement} container - Element to append link to
+ * @param {string} url - URL for the link (will be validated)
+ * @param {string} text - Display text for the link
+ */
+function createSafeLink(container, url, text) {
+    // Clear existing content safely
+    container.textContent = '';
+    
+    if (!isValidYouTubeUrl(url)) {
+        container.textContent = "Invalid link format";
+        return;
+    }
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = text;
+    container.appendChild(link);
+}
+
+/**
+ * Fetches episode link from YouTube API with pagination support
  * @param {string} playlistID - YouTube playlist ID
  * @param {string} episodeQuery - Episode name/number to search for
  * @returns {Promise<string|null>} - YouTube video URL or null if not found
@@ -407,6 +459,8 @@ const playlist4Season = (seasonSelected) => {
  * FIX #5: Made async to properly handle Promise
  * FIX #6: Access data.items instead of data.snippet
  * FIX #7: Use .includes() instead of 'in' operator for substring matching
+ * FIX: Added pagination to search through entire playlist
+ * FIX: Added guards for missing/malformed API response data
  */
 const fetchEpisode = async (playlistID, episodeQuery) => {
     if (!playlistID) {
@@ -414,30 +468,66 @@ const fetchEpisode = async (playlistID, episodeQuery) => {
         return null;
     }
     
+    if (!episodeQuery || typeof episodeQuery !== 'string') {
+        console.error("Invalid episode query");
+        return null;
+    }
+    
+    const searchTerm = episodeQuery.toUpperCase().trim();
+    let pageToken = '';
+    
     try {
-        // TODO: Replace [YOUR_API_KEY] with your actual YouTube Data API key
-        const response = await fetch(
-            `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistID}&key=[YOUR_API_KEY]`
-        );
+        // Paginate through all playlist items (YouTube API returns max 50 per request)
+        do {
+            // TODO: Replace [YOUR_API_KEY] with your actual YouTube Data API key
+            const url = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistID}&key=[YOUR_API_KEY]${pageToken ? `&pageToken=${pageToken}` : ''}`;
+            
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Guard against missing or malformed data.items
+            if (!data || !Array.isArray(data.items)) {
+                console.error("Invalid API response: missing items array");
+                return null;
+            }
+            
+            // Search through current page of items
+            const foundItem = data.items.find(item => {
+                // Guard against missing snippet or title fields
+                if (!item || !item.snippet || typeof item.snippet.title !== 'string') {
+                    return false;
+                }
+                return item.snippet.title.toUpperCase().trim().includes(searchTerm);
+            });
+            
+            if (foundItem) {
+                // Guard against missing resourceId or videoId
+                if (!foundItem.snippet.resourceId || typeof foundItem.snippet.resourceId.videoId !== 'string') {
+                    console.error("Invalid item: missing videoId");
+                    return null;
+                }
+                const videoId = foundItem.snippet.resourceId.videoId;
+                // Validate videoId format (11 characters, alphanumeric with _ and -)
+                if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+                    console.error("Invalid videoId format");
+                    return null;
+                }
+                return `https://youtube.com/watch?v=${videoId}`;
+            }
+            
+            // Get next page token for pagination
+            pageToken = data.nextPageToken || '';
+            
+        } while (pageToken);
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        console.log("Episode not found in playlist");
+        return null;
         
-        const data = await response.json();
-        
-        // FIX #6: YouTube API returns items array at data.items, not data.snippet
-        // FIX #7: Use .includes() for substring matching instead of 'in' operator
-        const foundItem = data.items.find(item => 
-            item.snippet.title.toUpperCase().trim().includes(episodeQuery.toUpperCase().trim())
-        );
-        
-        if (foundItem) {
-            return `https://youtube.com/watch?v=${foundItem.snippet.resourceId.videoId}`;
-        } else {
-            console.log("Episode not found in playlist");
-            return null;
-        }
     } catch (error) {
         console.error("Error fetching episode:", error);
         return null;
@@ -573,11 +663,11 @@ function initSeriesAdvanced() {
         const episodeValue = episodeInput.value.trim();
         
         if (!episodeValue) {
-            linkElement.innerHTML = "Please enter an episode name or number";
+            linkElement.textContent = "Please enter an episode name or number";
             return;
         }
         
-        linkElement.innerHTML = "Searching...";
+        linkElement.textContent = "Searching...";
         
         // If no connection (browser environment), skip database and use API directly
         if (!dbConnection) {
@@ -587,7 +677,7 @@ function initSeriesAdvanced() {
             const playlistID = playlist4Season(seasonValue);
             
             if (!playlistID) {
-                linkElement.innerHTML = "Please select a valid season (1-7)";
+                linkElement.textContent = "Please select a valid season (1-7)";
                 return;
             }
             
@@ -595,9 +685,10 @@ function initSeriesAdvanced() {
             const episodeLink = await fetchEpisode(playlistID, episodeValue);
             
             if (episodeLink) {
-                linkElement.innerHTML = `<a href="${episodeLink}" target="_blank">Watch Episode</a>`;
+                // Use safe link creation to prevent XSS
+                createSafeLink(linkElement, episodeLink, "Watch Episode");
             } else {
-                linkElement.innerHTML = "Episode not found. Try a different search term.";
+                linkElement.textContent = "Episode not found. Try a different search term.";
             }
             return;
         }
@@ -608,13 +699,14 @@ function initSeriesAdvanced() {
         dbConnection.query(findEpisodeQuery, [seasonValue, episodeValue], async (error, result) => {
             if (error) {
                 console.error("Database query error:", error);
-                linkElement.innerHTML = "Database error. Trying YouTube API...";
+                linkElement.textContent = "An error occurred. Please try again later.";
             }
             
             // Check if we got a valid result from database (using helper function)
             if (isValidDatabaseResult(result)) {
                 console.log("Link database retrieval successful! Yoylecake!");
-                linkElement.innerHTML = `<a href="${result[0].link}" target="_blank">Watch Episode</a>`;
+                // Use safe link creation to prevent XSS (even for cached database links)
+                createSafeLink(linkElement, result[0].link, "Watch Episode");
             } else {
                 // Not in database - fetch from API and store
                 ensureTableExists("links", linkElement);
@@ -626,7 +718,8 @@ function initSeriesAdvanced() {
                 const episodeLink = await fetchEpisode(playlistID, episodeValue);
                 
                 if (episodeLink) {
-                    linkElement.innerHTML = `<a href="${episodeLink}" target="_blank">Watch Episode</a>`;
+                    // Use safe link creation to prevent XSS
+                    createSafeLink(linkElement, episodeLink, "Watch Episode");
                     
                     // Insert to database for future cache
                     insertEpToTable({
@@ -636,7 +729,7 @@ function initSeriesAdvanced() {
                         playlistID: playlistID
                     });
                 } else {
-                    linkElement.innerHTML = "Episode not found";
+                    linkElement.textContent = "Episode not found";
                 }
             }
         });
