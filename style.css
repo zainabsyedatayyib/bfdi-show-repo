@@ -303,7 +303,7 @@ h2, h3, h4, h5, h6 {
 /* --- Navigation (Neo-Brutalist) --- */
 nav {
     position: absolute;
-    bottom: -5%;
+    bottom: -10%;
     width: 100%;
     z-index: 100;
     text-align: center;
@@ -406,6 +406,7 @@ section {
     padding: 6rem 2rem;
     position: relative;
     z-index: 20;
+    margin-top: 8rem;
 }
 
 .about h1 {
@@ -494,6 +495,7 @@ section {
 @media (max-width: 480px) {
     .about {
         padding: 3rem 0.75rem;
+        margin-top: 4rem;
     }
     
     .about h1 {
@@ -523,6 +525,8 @@ aside {
     gap: 1rem;
     clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 150px;
+    overflow: visible;
 }
 
 aside h1 {
@@ -542,6 +546,8 @@ aside img {
     height: auto;
     margin: 10px;
     flex-shrink: 0;
+    display: block;
+    object-fit: contain;
 }
 
 .ruby-standing {
@@ -1353,8 +1359,8 @@ dialog::backdrop {
 }
 
 .char-td {
-    top: -35%; 
-    left: 50%;
+    top: -30%; 
+    left: 45%;
     transform: translateX(-50%);
     width: clamp(60px, 12vw, 120px);
 }
@@ -1423,7 +1429,8 @@ dialog::backdrop {
 @media (max-width: 1024px) {
     .char-td {
         width: clamp(50px, 10vw, 100px);
-        top: -35%;
+        top: -30%;
+        left: 45%;
     }
     
     .char-gng {
@@ -1439,12 +1446,18 @@ dialog::backdrop {
         top: 10%;
         width: clamp(70px, 13vw, 140px);
     }
+    
+    .about {
+        padding: 5rem 1.5rem;
+        margin-top: 6rem;
+    }
 }
 
 @media (max-width: 768px) {
     .char-td {
         width: clamp(40px, 8vw, 80px);
         top: -30%;
+        left: 45%;
     }
     
     .char-gng {
@@ -1476,13 +1489,19 @@ dialog::backdrop {
         width: clamp(35px, 7vw, 65px);
         opacity: 0.8;
     }
+    
+    .about {
+        padding: 4rem 1rem;
+        margin-top: 5rem;
+    }
 }
 
 @media (max-width: 480px) {
     /* Make decorative characters smaller and more subtle on very small screens */
     .char-td {
         width: clamp(30px, 7vw, 60px);
-        top: -25%;
+        top: -30%;
+        left: 45%;
         opacity: 0.9;
     }
     
