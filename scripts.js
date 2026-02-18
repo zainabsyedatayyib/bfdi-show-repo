@@ -111,7 +111,7 @@ function initDialogs() {
     const closeDialogBtn = document.getElementById('closeDialogBtn');
 
     if (advancedBtn && advancedDialog) {
-        console.log('Dialog elements found');
+        console.log('Dialog elements found:', { dialogId: advancedDialog.id, buttonId: advancedBtn.id });
         
         advancedBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -122,21 +122,29 @@ function initDialogs() {
                 dropdown.classList.remove('show');
             }
             advancedDialog.showModal();
-            console.log('Dialog opened');
+            console.log('Dialog state changed:', { action: 'opened', dialogId: advancedDialog.id });
         });
 
         // Close dialog button handler
         if (closeDialogBtn) {
             closeDialogBtn.addEventListener('click', () => {
                 advancedDialog.close();
-                console.log('Dialog closed');
+                console.log('Dialog state changed:', { action: 'closed', trigger: 'button', dialogId: advancedDialog.id });
             });
         }
 
-        // Close dialog when clicking on backdrop (outside the dialog)
+        // Close dialog when clicking on backdrop (outside the dialog content area)
         advancedDialog.addEventListener('click', (e) => {
-            if (e.target === advancedDialog) {
+            const rect = advancedDialog.getBoundingClientRect();
+            const clickedOutside = (
+                e.clientX < rect.left ||
+                e.clientX > rect.right ||
+                e.clientY < rect.top ||
+                e.clientY > rect.bottom
+            );
+            if (clickedOutside) {
                 advancedDialog.close();
+                console.log('Dialog state changed:', { action: 'closed', trigger: 'backdrop', dialogId: advancedDialog.id });
             }
         });
     } else {
@@ -676,18 +684,27 @@ function initSeriesAdvanced() {
         
         // Get values from form inputs at time of submission (FIX from review)
         const seasonValue = parseInt(seasonSelect.value, 10);
-        const episodeValue = episodeInput.value.trim();
+        let episodeValue = episodeInput.value.trim();
         
         if (!episodeValue) {
             linkElement.textContent = "Please enter an episode name or number";
             return;
         }
         
+        // Validate and sanitize episode input to prevent malformed requests
+        // Allow alphanumeric characters, spaces, hyphens, colons, apostrophes, periods
+        const sanitizedEpisode = episodeValue.replace(/[^a-zA-Z0-9\s\-:',\.!?]/g, '');
+        if (sanitizedEpisode.length === 0 || sanitizedEpisode.length > 100) {
+            linkElement.textContent = "Please enter a valid episode name (letters, numbers, basic punctuation only)";
+            return;
+        }
+        episodeValue = sanitizedEpisode;
+        
         linkElement.textContent = "Searching...";
         
         // If no connection (browser environment), skip database and use API directly
         if (!dbConnection) {
-            console.log("No database connection - fetching directly from YouTube API");
+            console.log("Episode search initiated:", { season: seasonValue, query: episodeValue, source: 'youtube_api' });
             
             // FIX #9: Pass the season value to playlist4Season
             const playlistID = playlist4Season(seasonValue);
