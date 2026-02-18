@@ -1346,10 +1346,101 @@ dialog {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     font-family: var(--headerfont, sans-serif);
     background: var(--accent-yellow);
+    max-width: 500px;
+    width: 90%;
 }
 
 dialog::backdrop {
     background: rgba(26, 26, 46, 0.7);
+}
+
+/* Advanced Search Dialog Styles */
+#advancedDialog h2 {
+    margin: 0 0 0.5rem 0;
+    font-family: var(--headerfont);
+    color: var(--border-color);
+}
+
+#advancedDialog p {
+    margin-bottom: 1.5rem;
+    font-family: var(--defaultfont);
+    color: var(--border-color);
+    font-size: 0.95rem;
+}
+
+#advancedDialog .form-group {
+    margin-bottom: 1rem;
+}
+
+#advancedDialog label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: var(--border-color);
+    font-family: var(--defaultfont);
+}
+
+#advancedDialog select,
+#advancedDialog input[type="text"] {
+    width: 100%;
+    padding: 0.7rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: var(--defaultfont);
+    background-color: white;
+    color: var(--border-color);
+}
+
+#advancedDialog select:focus,
+#advancedDialog input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px rgba(196, 77, 255, 0.2);
+}
+
+#advancedDialog .form-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+#advancedDialog .form-actions button {
+    flex: 1;
+    margin: 0;
+}
+
+#advancedDialog #closeDialogBtn {
+    background-color: #6c757d;
+}
+
+#advancedDialog #closeDialogBtn:hover {
+    background-color: #5a6268;
+}
+
+#advancedDialog .episode-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    border: 1px solid rgba(26, 26, 46, 0.2);
+    text-align: center;
+}
+
+#advancedDialog #link {
+    margin: 0;
+    color: var(--border-color);
+    font-family: var(--defaultfont);
+}
+
+#advancedDialog #link a {
+    color: var(--accent-purple);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#advancedDialog #link a:hover {
+    text-decoration: underline;
 }
 
 /* --- Decorative Images --- */
