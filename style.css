@@ -303,7 +303,7 @@ h2, h3, h4, h5, h6 {
 /* --- Navigation (Neo-Brutalist) --- */
 nav {
     position: absolute;
-    bottom: 2%;
+    bottom: -5%;
     width: 100%;
     z-index: 100;
     text-align: center;
@@ -1353,7 +1353,7 @@ dialog::backdrop {
 }
 
 .char-td {
-    top: -25%; 
+    top: -35%; 
     left: 50%;
     transform: translateX(-50%);
     width: clamp(60px, 12vw, 120px);
@@ -1423,6 +1423,7 @@ dialog::backdrop {
 @media (max-width: 1024px) {
     .char-td {
         width: clamp(50px, 10vw, 100px);
+        top: -35%;
     }
     
     .char-gng {
@@ -1443,7 +1444,7 @@ dialog::backdrop {
 @media (max-width: 768px) {
     .char-td {
         width: clamp(40px, 8vw, 80px);
-        top: -20%;
+        top: -30%;
     }
     
     .char-gng {
@@ -1481,7 +1482,7 @@ dialog::backdrop {
     /* Make decorative characters smaller and more subtle on very small screens */
     .char-td {
         width: clamp(30px, 7vw, 60px);
-        top: -15%;
+        top: -25%;
         opacity: 0.9;
     }
     
