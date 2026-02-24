@@ -108,10 +108,9 @@ function initDropdowns() {
 function initDialogs() {
     const advancedBtn = document.getElementById('advancedBtn');
     const advancedDialog = document.getElementById('advancedDialog');
-    const closeDialogBtn = document.getElementById('closeDialogBtn');
 
     if (advancedBtn && advancedDialog) {
-        console.log('Dialog elements found:', { dialogId: advancedDialog.id, buttonId: advancedBtn.id });
+        console.log('Dialog elements found');
         
         advancedBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -122,30 +121,7 @@ function initDialogs() {
                 dropdown.classList.remove('show');
             }
             advancedDialog.showModal();
-            console.log('Dialog state changed:', { action: 'opened', dialogId: advancedDialog.id });
-        });
-
-        // Close dialog button handler
-        if (closeDialogBtn) {
-            closeDialogBtn.addEventListener('click', () => {
-                advancedDialog.close();
-                console.log('Dialog state changed:', { action: 'closed', trigger: 'button', dialogId: advancedDialog.id });
-            });
-        }
-
-        // Close dialog when clicking on backdrop (outside the dialog content area)
-        advancedDialog.addEventListener('click', (e) => {
-            const rect = advancedDialog.getBoundingClientRect();
-            const clickedOutside = (
-                e.clientX < rect.left ||
-                e.clientX > rect.right ||
-                e.clientY < rect.top ||
-                e.clientY > rect.bottom
-            );
-            if (clickedOutside) {
-                advancedDialog.close();
-                console.log('Dialog state changed:', { action: 'closed', trigger: 'backdrop', dialogId: advancedDialog.id });
-            }
+            console.log('Dialog opened');
         });
     } else {
         console.error('Dialog elements not found:', { advancedBtn, advancedDialog });
@@ -349,37 +325,23 @@ function initCharacterInteractions() {
  * ============================================================================
  */
 
-// Module-level database connection variable (FIX #1: moved outside function for proper scope)
-let dbConnection = null;
-
-// Allowlist of valid table names to prevent SQL injection in DDL
-const ALLOWED_TABLES = ['links'];
+// Module-level connection variable (FIX #1: moved outside function for proper scope)
+let connection = null;
 
 /**
- * Ensures the 'links' table exists, creates it if not
- * @param {string} table - The table name to check/create (must be in ALLOWED_TABLES)
+ * Checks if the 'links' table exists, creates it if not
+ * @param {string} table - The table name to check/create
  * @param {HTMLElement} outputElement - Element to display error messages (FIX #3)
  */
-function ensureTableExists(table, outputElement) {
-    // Validate table name against allowlist to prevent SQL injection
-    if (!ALLOWED_TABLES.includes(table)) {
-        console.error(`Invalid table name attempted: ${table}`);
-        if (outputElement) {
-            outputElement.textContent = "An error occurred. Please try again later.";
-        }
-        return;
-    }
-    
+function checkIfTableExists(table, outputElement) {
     // FIX #10: Use parameterized query placeholder (? instead of template literal)
     const check_exists = `SELECT table_name FROM information_schema.tables WHERE table_schema = ? AND table_name = ?;`;
     
-    dbConnection.query(check_exists, [table, table], (error, result2) => {
+    connection.query(check_exists, [table, table], (error, result2) => {
         if (error) {
-            // Log detailed error internally, show generic message to user
-            console.error("Database table check error:", error);
-            if (outputElement) {
-                outputElement.textContent = "An error occurred. Please try again later.";
-            }
+            const msg = "Sorry, there's an error checking the table! 'Aw, seriously!' - David -> " + error;
+            console.error(msg);
+            if (outputElement) outputElement.innerHTML = msg;
             return;
         }
         
@@ -387,8 +349,7 @@ function ensureTableExists(table, outputElement) {
         // Original: !"links" in result2 (WRONG - evaluates as: false in result2)
         // Fixed: Check if result is empty (table doesn't exist)
         if (!result2 || result2.length === 0) {
-            // Table name is validated above, safe to use in DDL
-            const createTable = `CREATE TABLE IF NOT EXISTS links (
+            const createTable = `CREATE TABLE IF NOT EXISTS ${table} (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 season INT NOT NULL,
                 episodeNum INT NOT NULL,
@@ -396,15 +357,13 @@ function ensureTableExists(table, outputElement) {
                 playlistID VARCHAR(100)
             )`;
             
-            dbConnection.query(createTable, (createError) => {
+            connection.query(createTable, (createError) => {
                 if (createError) {
-                    // Log detailed error internally, show generic message to user
-                    console.error("Database table creation error:", createError);
-                    if (outputElement) {
-                        outputElement.textContent = "An error occurred. Please try again later.";
-                    }
+                    const msg = "Sorry, there's an error creating the table! 'Aw, seriously!' - David -> " + createError;
+                    console.error(msg);
+                    if (outputElement) outputElement.innerHTML = msg;
                 } else {
-                    console.log("Creating table successful!");
+                    console.log("Creating table successful!"); // FIX: typo "succsessful" -> "successful"
                 }
             });
         }
@@ -440,42 +399,7 @@ const playlist4Season = (seasonSelected) => {
 };
 
 /**
- * Validates that a YouTube video URL is safe (matches expected YouTube URL pattern)
- * @param {string} url - URL to validate
- * @returns {boolean} - True if URL is a valid YouTube video URL
- */
-function isValidYouTubeUrl(url) {
-    if (!url || typeof url !== 'string') return false;
-    // Only allow YouTube video URLs with expected format
-    const youtubePattern = /^https:\/\/(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}$/;
-    return youtubePattern.test(url);
-}
-
-/**
- * Safely creates a link element (avoids XSS by not using innerHTML with external data)
- * @param {HTMLElement} container - Element to append link to
- * @param {string} url - URL for the link (will be validated)
- * @param {string} text - Display text for the link
- */
-function createSafeLink(container, url, text) {
-    // Clear existing content safely
-    container.textContent = '';
-    
-    if (!isValidYouTubeUrl(url)) {
-        container.textContent = "Invalid link format";
-        return;
-    }
-    
-    const link = document.createElement('a');
-    link.href = url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.textContent = text;
-    container.appendChild(link);
-}
-
-/**
- * Fetches episode link from YouTube API with pagination support
+ * Fetches episode link from YouTube API
  * @param {string} playlistID - YouTube playlist ID
  * @param {string} episodeQuery - Episode name/number to search for
  * @returns {Promise<string|null>} - YouTube video URL or null if not found
@@ -483,8 +407,6 @@ function createSafeLink(container, url, text) {
  * FIX #5: Made async to properly handle Promise
  * FIX #6: Access data.items instead of data.snippet
  * FIX #7: Use .includes() instead of 'in' operator for substring matching
- * FIX: Added pagination to search through entire playlist
- * FIX: Added guards for missing/malformed API response data
  */
 const fetchEpisode = async (playlistID, episodeQuery) => {
     if (!playlistID) {
@@ -492,66 +414,30 @@ const fetchEpisode = async (playlistID, episodeQuery) => {
         return null;
     }
     
-    if (!episodeQuery || typeof episodeQuery !== 'string') {
-        console.error("Invalid episode query");
-        return null;
-    }
-    
-    const searchTerm = episodeQuery.toUpperCase().trim();
-    let pageToken = '';
-    
     try {
-        // Paginate through all playlist items (YouTube API returns max 50 per request)
-        do {
-            // TODO: Replace [YOUR_API_KEY] with your actual YouTube Data API key
-            const url = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistID}&key=[YOUR_API_KEY]${pageToken ? `&pageToken=${pageToken}` : ''}`;
-            
-            const response = await fetch(url);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            // Guard against missing or malformed data.items
-            if (!data || !Array.isArray(data.items)) {
-                console.error("Invalid API response: missing items array");
-                return null;
-            }
-            
-            // Search through current page of items
-            const foundItem = data.items.find(item => {
-                // Guard against missing snippet or title fields
-                if (!item || !item.snippet || typeof item.snippet.title !== 'string') {
-                    return false;
-                }
-                return item.snippet.title.toUpperCase().trim().includes(searchTerm);
-            });
-            
-            if (foundItem) {
-                // Guard against missing resourceId or videoId
-                if (!foundItem.snippet.resourceId || typeof foundItem.snippet.resourceId.videoId !== 'string') {
-                    console.error("Invalid item: missing videoId");
-                    return null;
-                }
-                const videoId = foundItem.snippet.resourceId.videoId;
-                // Validate videoId format (11 characters, alphanumeric with _ and -)
-                if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
-                    console.error("Invalid videoId format");
-                    return null;
-                }
-                return `https://youtube.com/watch?v=${videoId}`;
-            }
-            
-            // Get next page token for pagination
-            pageToken = data.nextPageToken || '';
-            
-        } while (pageToken);
+        // TODO: Replace [YOUR_API_KEY] with your actual YouTube Data API key
+        const response = await fetch(
+            `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistID}&key=[YOUR_API_KEY]`
+        );
         
-        console.log("Episode not found in playlist");
-        return null;
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         
+        const data = await response.json();
+        
+        // FIX #6: YouTube API returns items array at data.items, not data.snippet
+        // FIX #7: Use .includes() for substring matching instead of 'in' operator
+        const foundItem = data.items.find(item => 
+            item.snippet.title.toUpperCase().trim().includes(episodeQuery.toUpperCase().trim())
+        );
+        
+        if (foundItem) {
+            return `https://youtube.com/watch?v=${foundItem.snippet.resourceId.videoId}`;
+        } else {
+            console.log("Episode not found in playlist");
+            return null;
+        }
     } catch (error) {
         console.error("Error fetching episode:", error);
         return null;
@@ -584,7 +470,7 @@ function insertEpToTable(param) {
     // FIX: Added VALUES clause and proper parameter placeholders
     const insert = 'INSERT INTO links (season, episodeNum, link, playlistID) VALUES (?, ?, ?, ?)';
     
-    dbConnection.query(insert, [param.season, param.episodeNum, param.link, param.playlistID], (error) => {
+    connection.query(insert, [param.season, param.episodeNum, param.link, param.playlistID], (error) => {
         if (error) {
             console.error("Whoopsie! Database insertion failed:", error);
         } else {
@@ -612,15 +498,15 @@ function connectToDatabase() {
         // NOTE: 'require' only works in Node.js environment
         const mysql = require("mysql");
         
-        dbConnection = mysql.createConnection({
+        connection = mysql.createConnection({
             host: "",       // TODO: Add your database host (e.g., "localhost" or cloud DB URL)
             user: "",       // TODO: Add your database username
             password: "",   // TODO: Add your database password
             database: "",   // TODO: Add your database name
-            port: 3306      // Default MySQL port
+            port: 3306      // Default MySQL port (was 'undefined' which would cause issues)
         });
         
-        dbConnection.connect((error) => {
+        connection.connect((error) => {
             if (error) {
                 const msg = "Sorry, there's an error with the database connection! 'Aw, seriously!' - David -> " + error;
                 console.error(msg);
@@ -629,7 +515,7 @@ function connectToDatabase() {
             console.log("Connection successful! YOYLECAKE! Now checking if database is present...");
         });
         
-        return dbConnection;
+        return connection;
     } catch (error) {
         console.error("Database module not available (expected in browser environment):", error.message);
         return null;
@@ -637,31 +523,16 @@ function connectToDatabase() {
 }
 
 /**
- * Helper function to validate database query result
- * @param {Array} result - Database query result
- * @returns {boolean} - True if result contains a valid link
- */
-function isValidDatabaseResult(result) {
-    return result && 
-           result.length > 0 && 
-           result[0].link && 
-           result[0].link.startsWith("https://");
-}
-
-/**
  * Initializes the Advanced Series Search feature
- * Sets up event listeners for form submission
  * 
  * FIX #9: Pass season value to playlist4Season()
  * FIX #11: "documentElementById" -> "document.getElementById"
  * FIX #12: Call fetchEpisode() once and reuse the result (removed function overhead)
- * FIX (from review): Now properly sets up event handler instead of running immediately
  */
-function initSeriesAdvanced() {
+async function initSeriesAdvanced() {
     const linkElement = document.getElementById("link");
-    const seasonSelect = document.getElementById("seasonSelect"); // Get season dropdown by specific ID
+    const seasonSelect = document.querySelector("select"); // Get season dropdown
     const episodeInput = document.getElementById("episode"); // Get episode input
-    const searchForm = document.getElementById("advancedSearchForm"); // Form element
     
     // Check if required elements exist on this page
     if (!linkElement || !seasonSelect || !episodeInput) {
@@ -670,121 +541,74 @@ function initSeriesAdvanced() {
         return;
     }
     
-    // Connect to database once on page load (will fail gracefully in browser)
+    // Connect to database (will fail gracefully in browser)
     connectToDatabase();
     
-    /**
-     * Handles the episode search when user submits the form
-     * This is async to properly handle the YouTube API fetch
-     */
-    async function handleEpisodeSearch(event) {
-        if (event) {
-            event.preventDefault();
-        }
+    // Get values from form inputs
+    const seasonValue = parseInt(seasonSelect.value, 10);
+    const episodeValue = episodeInput.value;
+    
+    // If no connection (browser environment), skip database and use API directly
+    if (!connection) {
+        console.log("No database connection - fetching directly from YouTube API");
         
-        // Get values from form inputs at time of submission (FIX from review)
-        const seasonValue = parseInt(seasonSelect.value, 10);
-        let episodeValue = episodeInput.value.trim();
+        // FIX #9: Pass the season value to playlist4Season
+        const playlistID = playlist4Season(seasonValue);
         
-        if (!episodeValue) {
-            linkElement.textContent = "Please enter an episode name or number";
+        if (!playlistID) {
+            linkElement.innerHTML = "Please select a valid season (1-7)";
             return;
         }
         
-        // Validate and sanitize episode input to prevent malformed requests
-        // Allow alphanumeric characters, spaces, hyphens, colons, apostrophes, periods
-        const sanitizedEpisode = episodeValue.replace(/[^a-zA-Z0-9\s\-:',\.!?]/g, '');
-        if (sanitizedEpisode.length === 0 || sanitizedEpisode.length > 100) {
-            linkElement.textContent = "Please enter a valid episode name (letters, numbers, basic punctuation only)";
+        // FIX #12: Call fetchEpisode once and store result (prevents function overhead)
+        const episodeLink = await fetchEpisode(playlistID, episodeValue);
+        
+        if (episodeLink) {
+            linkElement.innerHTML = `<a href="${episodeLink}" target="_blank">Watch Episode</a>`;
+        } else {
+            linkElement.innerHTML = "Episode not found. Try a different search term.";
+        }
+        return;
+    }
+    
+    // Database path (for future Node.js backend implementation)
+    const findEpisode = 'SELECT link FROM links WHERE season = ? AND episodeNum = ?';
+    
+    connection.query(findEpisode, [seasonValue, episodeValue], async (error, result) => {
+        if (error) {
+            console.error("Database query error:", error);
             return;
         }
-        episodeValue = sanitizedEpisode;
         
-        linkElement.textContent = "Searching...";
-        
-        // If no connection (browser environment), skip database and use API directly
-        if (!dbConnection) {
-            console.log("Episode search initiated:", { season: seasonValue, query: episodeValue, source: 'youtube_api' });
+        // Check if we got a valid result from database
+        if (result && result.length > 0 && result[0].link && result[0].link.startsWith("https://")) {
+            console.log("Link database retrieval successful! Yoylecake!");
+            linkElement.innerHTML = "Link: " + result[0].link;
+        } else {
+            // Not in database - fetch from API and store
+            checkIfTableExists("links", linkElement);
             
-            // FIX #9: Pass the season value to playlist4Season
+            // FIX #9: Pass season value to playlist4Season
             const playlistID = playlist4Season(seasonValue);
             
-            if (!playlistID) {
-                linkElement.textContent = "Please select a valid season (1-7)";
-                return;
-            }
-            
-            // FIX #12: Call fetchEpisode once and store result (prevents function overhead)
+            // FIX #12: Call fetchEpisode ONCE and reuse (was calling twice before)
             const episodeLink = await fetchEpisode(playlistID, episodeValue);
             
             if (episodeLink) {
-                // Use safe link creation to prevent XSS
-                createSafeLink(linkElement, episodeLink, "Watch Episode");
+                linkElement.innerHTML = episodeLink;
+                
+                // Insert to database for future cache
+                insertEpToTable({
+                    season: seasonValue,
+                    episodeNum: episodeValue,
+                    link: episodeLink,
+                    playlistID: playlistID
+                });
             } else {
-                linkElement.textContent = "Episode not found. Try a different search term.";
+                linkElement.innerHTML = "Episode not found";
             }
-            return;
         }
-        
-        // Database path (for future Node.js backend implementation)
-        const findEpisodeQuery = 'SELECT link FROM links WHERE season = ? AND episodeNum = ?';
-        
-        dbConnection.query(findEpisodeQuery, [seasonValue, episodeValue], async (error, result) => {
-            if (error) {
-                console.error("Database query error:", error);
-                linkElement.textContent = "An error occurred. Please try again later.";
-            }
-            
-            // Check if we got a valid result from database (using helper function)
-            if (isValidDatabaseResult(result)) {
-                console.log("Link database retrieval successful! Yoylecake!");
-                // Use safe link creation to prevent XSS (even for cached database links)
-                createSafeLink(linkElement, result[0].link, "Watch Episode");
-            } else {
-                // Not in database - fetch from API and store
-                ensureTableExists("links", linkElement);
-                
-                // FIX #9: Pass season value to playlist4Season
-                const playlistID = playlist4Season(seasonValue);
-                
-                // FIX #12: Call fetchEpisode ONCE and reuse (was calling twice before)
-                const episodeLink = await fetchEpisode(playlistID, episodeValue);
-                
-                if (episodeLink) {
-                    // Use safe link creation to prevent XSS
-                    createSafeLink(linkElement, episodeLink, "Watch Episode");
-                    
-                    // Insert to database for future cache
-                    insertEpToTable({
-                        season: seasonValue,
-                        episodeNum: episodeValue,
-                        link: episodeLink,
-                        playlistID: playlistID
-                    });
-                } else {
-                    linkElement.textContent = "Episode not found";
-                }
-            }
-        });
-    }
-    
-    // Set up event listener - either on form submit or button click
-    if (searchForm) {
-        searchForm.addEventListener('submit', handleEpisodeSearch);
-    } else {
-        // Fallback: If no form, listen for Enter key in episode input
-        episodeInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleEpisodeSearch(e);
-            }
-        });
-        
-        // Also allow triggering via a search button if it exists
-        const searchBtn = document.getElementById("advancedSearchBtn");
-        if (searchBtn) {
-            searchBtn.addEventListener('click', handleEpisodeSearch);
-        }
-    }
+    });
 }
 
 
