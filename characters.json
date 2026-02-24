@@ -1,29 +1,35 @@
 {
     "code": 200,
     "status": "OK",
-    "things2search": {
+    "disclaimer":{
+        "images": "absolute image file paths are from bfdiseries.comic.studio";
+        "descs": "every 'description', or 'desc' for short, is from 'Battle for Dream Island: Official Character Guide' and 'battlefordreamisland.fandom.com'";
+        "advice": "crediting these sources is highly recommended.";
+        "badges": "Badges can either be Uncontested, Contestant, or Host.";
+    }
+    "topics": {
         "8-ball": {
             "name": "8-Ball",
             "badge": "Contestant",
-            "desc": "8-Ball is a male contestant on Battle for BFDI.",
+            "desc": "8-Ball is a pool ball-the black 8 to be exact. Unlike the other balls, he moves by rolling around. 8-Ball will not let people forget that he doesn't have a favorite number.",
             "image": "https://cdn.comic.studio/images/bfdiseries/characters/64727d7d1fd4851d93156d708965d908.png?filename=8ballbfdi.png"
         },
         "balloony": {
             "name": "Balloony",
             "badge": "Contestant",
-            "desc": "Balloony is a male contestant on Battle for BFDI.",
+            "desc": "Balloony is a balloon filled, apparently, with air. He can move around by letting out air, but it leaves him deflated. Not a good look for a balloon. Balloony hates to be told what to do, and he tries to rely on himself to accomplish things because he doesn't trust others to do it right.Like all balloons, it's important for Balloony to avoid sharp objects and being over inflated. Did You Know?: Balloony tried filling himself with helium just once. It was very painful.",
             "image": "https://cdn.comic.studio/images/bfdiseries/characters/c8634b532e5eaa5c20ea7265fe9b6b8e.png?filename=Screenshot_2024-12-15_at_5.24.43_PM-removebg-preview.png"
         },
         "barfbag": {
             "name": "Barf Bag",
             "badge": "Contestant",
-            "desc": "Barf Bag is a female contestant on Battle for BFDI.",
+            "desc": "Imagine having to carry around a bag of vomit 24/7. Barf Bag doesn't have to imagine. Barf Bag has a high opinion of herself, believing she is smart and often sensible. Some people don't think that highly of Barf Bag, because they incorrectly believe the barf molecules pollute her brain, which makes her incredibly upset. After all, she answered a difficult quiz question for her team correctly! Did You Know?: When Barf Bag feels like throwing up, she cannot use herself to collect her barf, because that would have no effect.",
             "image": "https://cdn.comic.studio/images/bfdiseries/characters/6713c538d5812c566c41add547db37e3.png?filename=image_21.png"
         },
         "basketball": {
             "name": "Basketball",
             "badge": "Contestant",
-            "desc": "Basketball is a female contestant on Battle for BFDI.",
+            "desc": "Like all basketballs filled with air, Basketball is quite bouncy. Some consider her to be nothing more than a follower, but she is always in the middle of the action.Basketball is good friends with 8-Ball and Grassy. On the other hand, she's not super close with Golf Ball and Tennis Ball, but does share their affinity for scientific exploration. However, she treats the discipline differently, applying her discoveries more humbly.Did You Know?: Basketball sometimes worries that she might be too bouncy.",
             "image": "basketballM.png"
         },
         "bell": {
@@ -399,4 +405,5 @@
             "image": "yellowfaceM.png"
         }
     }
+
 }
